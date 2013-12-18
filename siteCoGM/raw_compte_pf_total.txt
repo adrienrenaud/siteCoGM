@@ -3,7 +3,7 @@
 TOTAL :
 ----------------------------------------
 ::: depense :
-adrienR : 1388 pf
+adrienR : 388 pf
 ayor85 : 70 pf
 bravevolonte : 137 pf
 canardmalin82 : 236 pf
@@ -30,7 +30,7 @@ yamaod : 188 pf
 yoyo34540 : 26 pf
 zeux123 : 229 pf
 - - - - - - - - - 
-somme : 5827
+somme : 4827
 ----------------------------------------
 ::: recu :
 adrienR : 430 pf
@@ -39,7 +39,7 @@ bravevolonte : 142 pf
 canardmalin82 : 269 pf
 chefcooker94 : 236 pf
 david59300 : 0 pf
-emilieleo : 1228 pf
+emilieleo : 228 pf
 fifi7489 : 269 pf
 fladous : 100 pf
 gadym : 0 pf
@@ -60,16 +60,16 @@ yamaod : 144 pf
 yoyo34540 : 0 pf
 zeux123 : 212 pf
 - - - - - - - - - 
-somme : 5827
+somme : 4827
 ----------------------------------------
 ::: depense - recu :
-adrienR : 958 pf
+adrienR : -42 pf
 ayor85 : -13 pf
 bravevolonte : -5 pf
 canardmalin82 : -33 pf
 chefcooker94 : 6 pf
 david59300 : 8 pf
-emilieleo : -1088 pf
+emilieleo : -88 pf
 fifi7489 : -21 pf
 fladous : -50 pf
 gadym : 48 pf

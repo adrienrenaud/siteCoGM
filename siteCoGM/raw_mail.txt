@@ -1,48 +1,48 @@
 @CoGM
-On a fini le GM (Sophia) de emilieleo en 334 jours, donc je compte 1002 pf maximum.
-Demain on va chez adrienR sur .
+On a fini le GM (Sophia) de emilieleo en 3 jours, donc je compte 9 pf maximum.
+Demain on va chez gadym sur .
 
 Voila les pf pris en compte sur le dernier GM :
 ----------------------------------------
 ::: Sophia de emilieleo :
-adrienR : 1000 pf
-ayor85 : 0 pf
-bravevolonte : 0 pf
-canardmalin82 : 0 pf
-chefcooker94 : 0 pf
-david59300 : 0 pf
-emilieleo : 0 pf
-fifi7489 : 0 pf
+adrienR : 6 pf
+ayor85 : 3 pf
+bravevolonte : 6 pf
+canardmalin82 : 6 pf
+chefcooker94 : 2 pf
+david59300 : 8 pf
+emilieleo : 9 pf
+fifi7489 : 9 pf
 fladous : 0 pf
-gadym : 0 pf
-guibassim : 0 pf
-idunn08 : 0 pf
+gadym : 9 pf
+guibassim : 7 pf
+idunn08 : 9 pf
 jujus94 : 0 pf
-locky81 : 0 pf
-onclepotiron : 0 pf
-ramoutch16 : 0 pf
-rg68 : 0 pf
-seb123 : 0 pf
-shadowpleague : 0 pf
-sinquem : 0 pf
+locky81 : 9 pf
+onclepotiron : 6 pf
+ramoutch16 : 9 pf
+rg68 : 3 pf
+seb123 : 6 pf
+shadowpleague : 3 pf
+sinquem : 6 pf
 sloulou : 0 pf
-shawnee : 0 pf
-tiousmi35 : 0 pf
-yamaod : 0 pf
+shawnee : 6 pf
+tiousmi35 : 7 pf
+yamaod : 3 pf
 yoyo34540 : 0 pf
-zeux123 : 0 pf
+zeux123 : 6 pf
 ----------------------------------------
 
 Et le compte total :
 ----------------------------------------
 ::: depense - recu :
-adrienR : 958 pf
+adrienR : -42 pf
 ayor85 : -13 pf
 bravevolonte : -5 pf
 canardmalin82 : -33 pf
 chefcooker94 : 6 pf
 david59300 : 8 pf
-emilieleo : -1088 pf
+emilieleo : -88 pf
 fifi7489 : -21 pf
 fladous : -50 pf
 gadym : 48 pf
