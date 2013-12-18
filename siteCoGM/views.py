@@ -49,8 +49,14 @@ def page_mail(request):
     
     
 class ajoutGMForm(forms.Form):
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
     dataGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 2}))     
-    pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 30}))    
+    pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 30}))
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if password != "marignan1515":
+            raise forms.ValidationError("Mauvais password !")
+        return password
   
 def ajout_GM(request):
     if request.method == 'POST':
@@ -141,7 +147,13 @@ def update_compte_total_mail():
 
 
 class modifyDetailForm(forms.Form):
-    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 150, 'rows': 30}))     
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 150, 'rows': 30}))  
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if password != "marignan1515":
+            raise forms.ValidationError("Mauvais password !")
+        return password
 
   
 def modify_compte_detail(request):
@@ -171,7 +183,12 @@ def modify_compte_detail(request):
     
 
 class miseAJourGraphForm(forms.Form):
-    pass
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if password != "marignan1515":
+            raise forms.ValidationError("Mauvais password !")
+        return password
 
 def mise_a_jour_graph(request):
     if request.method == 'POST':
