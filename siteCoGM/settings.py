@@ -1,5 +1,5 @@
 """
-Django settings for siteCoGM project.
+Django settings for mysite project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -17,14 +17,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%t+pe!ly!@$xy$z$uj^w%wtm#!4up1(@z2(86%0a9pf6bj3av$'
+SECRET_KEY = 'pallcvt&qv%)xfnfwn4&+q2i!7l_6w(^x*8vuh*nb!33e6l&g^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.arenaud.kd.io']
 
 
 # Application definition
@@ -62,6 +62,16 @@ DATABASES = {
     }
 }
 
+
+
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates')
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -76,14 +86,33 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+
+
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/var/www/example.com/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# URL prefix for static files.
+# Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
+# Additional locations of static files
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'siteCoGM/static'),
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+
+MEDIA_URL = '/media/'
 
 
-# Parse database configuration from $DATABASE_URL
+
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
@@ -102,3 +131,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+

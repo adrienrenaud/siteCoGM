@@ -1,0 +1,623 @@
+* {
+ #font-size: 100%;
+ font-family: sans-serif;
+}
+
+
+body {
+    background-color: white;
+}
+
+
+#header {
+   background-color: white;
+    position: absolute;    
+    z-index: 10;
+    width: 100%;
+    height: 125px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    border-width: thin;
+	border-style: solid;
+	border-color: black;
+    border:none;
+}
+
+#content {
+   background-color: white;
+    position: absolute; 
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 1500px;
+    padding-top:50px;
+    margin-top: 125px;
+    border-width: thin;
+	border-style: solid;
+	border-color: black;
+    border:none;
+
+
+}
+
+#sidebar {
+    background-color: white;
+    z-index: 100;
+    height: 100%;
+    position: fixed;
+    //position: absolute;
+    right: 0px;
+    top:   200px;
+    width: 250px;
+    border-width: thin;
+	border-style: solid;
+	border-color: black;
+    border:none;
+
+
+}
+
+
+#conbar {
+   background-color: white;
+    z-index: 100;
+    height: 200px;
+    position: absolute;
+    position: fixed;
+    right: 0px;
+    top:   0px;
+    width: 250px;
+    border-width: thin;
+	border-style: solid;
+	border-color: black;
+    border:none;
+}
+
+
+p.textContent{
+   margin-left:10px;
+}
+
+
+p.textBoxContent, div.textBoxContent{
+    background-color:#f5f5f5;
+    padding-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    margin-left : 10px;
+    margin-right : 260px;
+    margin-bottom : 10px;
+}
+
+p.textSideBar{
+   margin-left:10px;
+}
+
+
+p.textBoxSideBar{
+    background-color:#f5f5f5;
+    padding-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    margin-left : 10px;
+    margin-right : 10px;
+    margin-bottom : 10px;
+}
+
+
+
+
+
+
+#welcome,#sideBarWelcome{
+    font-size:medium;
+    background-color:#f5f5f5;
+
+    padding-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    margin-left : 10px;
+    margin-right : 10px;
+    margin-bottom : 10px;
+
+}
+
+font.textColor
+{
+color:red;
+}
+
+font.textColor2
+{
+color:blue;
+}
+
+a.linkColor
+{
+color:blue;
+}
+
+#logo{
+
+    float: left;
+    width: 240px; 
+    height: 120px;
+	
+}
+
+#item_boulangerie{
+    border-width: thin;
+	border-style: solid;
+	border-color: black;
+    padding-left:10px;
+    margin-left : 10px;
+    margin-right : 260px;
+    margin-bottom : 10px;
+    border-radius: 10px;
+}
+
+
+#item_boulangerie_favorite{
+    border-width: thin;
+	border-style: solid;
+	border-color: black;
+    padding-left:10px;
+    margin-left : 10px;
+    margin-right : 10px;
+    margin-bottom : 5px;
+    border-radius: 7px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+
+
+
+.dbSearchForm
+{
+    position: relative;
+    border-width: thin;
+	border-style: solid;
+    margin-left : 10px;
+    #margin-right : 620px;
+    width:500px;
+    margin-bottom : 10px;
+    border-radius: 10px;
+    padding-left:10px;
+    padding-top:10px;
+    #padding-bottom:10px;
+    font-size:small;
+}
+
+
+.loginForm
+{
+    position: relative;
+    #border-width: thin;
+	#border-style: solid;
+    #border-radius: 10px;
+    margin-left : 5px;
+    margin-right : 5px;
+    margin-bottom : 5px;
+    margin-top : 5px;
+    padding-right:5px;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size:small;
+}
+
+.createUserForm,.changeBoulangerieForm
+{
+    position: relative;
+    #border-width: thin;
+	#border-style: solid;
+    #border-radius: 10px;
+    margin-left : 5px;
+    margin-right : 5px;
+    margin-bottom : 5px;
+    margin-top : 5px;
+    padding-right:5px;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size:small;
+}
+
+
+
+
+#searchLabelField{
+    #border-width: thin;
+	#border-style: solid;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    #margin-left : 5px;
+    width:280px;
+    #height: 20px;
+    #margin-bottom : 10px;
+    #border-radius: 10px;
+    background-color: #f5f5f5;
+ 
+}
+
+
+#loginLabelField{
+    #border-width: thin;
+	#border-style: solid;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-bottom : 5px;
+    #width:100px;
+    #height: 20px;
+    #border-radius: 10px;
+    background-color: #f5f5f5;
+ 
+}
+
+
+
+#changeBoulangerieLabelField{
+    #border-width: thin;
+	#border-style: solid;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-bottom : 5px;
+    #margin-left : 5px;
+    #width:280px;
+    width:280px;
+    #height: 20px;
+    #margin-bottom : 10px;
+    #border-radius: 10px;
+    background-color: #f5f5f5;
+ 
+}
+
+.createUserLabelField{
+    #border-width: thin;
+	#border-style: solid;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-bottom : 5px;
+    #margin-left : 5px;
+    #width:280px;
+    #width:280px;
+    #height: 20px;
+    #margin-bottom : 10px;
+    #border-radius: 10px;
+    background-color: #f5f5f5;
+ 
+}
+
+#createUserLabelField{
+    width:280px; 
+}
+
+#createUserLabelFieldError{
+    width:500px; 
+}
+
+
+.errorMessage
+{
+    position:relative;
+    float:right;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-right:15px;
+    color:red;
+}
+
+
+.loginField
+{
+}
+
+
+.dbSearchField
+{
+}
+
+.captcha
+{
+    #width: 120px; 
+    #height: 120px;
+
+}
+
+
+input[type="text"].dbSearchField, input[type="text"].loginField, input[type="password"].loginField{
+    #display:none; 
+    #margin:10px;
+    #color:red;
+    border: 1px solid black; 
+    -webkit-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    -moz-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    padding: 5px;
+    #background: rgba(255,255,255,0.5);
+    #margin: 0 0 10px 0;
+}
+
+input[type="text"]{
+    #display:none; 
+    #margin:10px;
+    #color:red;
+    border: 1px solid black; 
+    -webkit-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    -moz-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    padding: 5px;
+    #background: rgba(255,255,255,0.5);
+    #margin: 0 0 10px 0;
+}
+
+
+
+
+#loginButton
+{
+    position:relative;
+    width:100px;
+    height:30px;
+    font-size:medium;
+    float: left;
+}
+
+
+#loginButton:hover
+{
+    font-size:large;
+}
+
+
+
+#removeButtonSideBar
+{
+    margin-left:10px;
+    margin-right:10px;
+    position:relative;
+    width:150px;
+    height:50px;
+    font-size:medium;
+}
+
+
+#removeButtonSideBar:hover
+{
+    font-size:large;
+}
+
+
+#logoutButton
+{
+    margin-left:10px;
+    margin-right:10px;
+    position:relative;
+    width:100px;
+    height:30px;
+    font-size:medium;
+    float: right;
+}
+
+
+#logoutButton:hover
+{
+    font-size:large;
+}
+
+
+#createUserButton
+{
+    #margin-left:10px;
+    margin-right:10px;
+    position:relative;
+    width:130px;
+    height:50px;
+    font-size:large;
+    #float: right;
+}
+
+
+#createUserButton:hover
+{
+    font-size:x-large;
+}
+
+
+#changeBoulangerieButton
+{
+    margin-left:10px;
+    margin-right:10px;
+    position:relative;
+    width:100px;
+    height:30px;
+    font-size:large;
+    #float: right;
+}
+
+
+#changeBoulangerieButton:hover
+{
+    font-size:x-large;
+}
+
+
+#addRemoveButton
+{
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:10px;
+    position:relative;
+    width:100px;
+    height:30px;
+    font-size:small;
+    float: right;
+}
+
+
+#addRemoveButton:hover
+{
+    font-size:medium;
+}
+
+    
+
+#dbDisplayButton
+{
+    position:absolute;
+    top:25px;
+    left:350px;
+    width:110px;
+    height:50px;
+    font-size:large;
+}
+
+#dbDisplayButton:hover
+{
+    font-size:x-large;;
+}
+
+
+
+
+
+
+
+.displayButton
+{
+
+    background-color:#BDBDBD;
+
+
+    border-radius: 10px;
+    #border:none;
+
+    color: #333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+    background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #b3b3b3;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+
+
+}
+
+
+.displayButton:hover
+{
+
+       background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+        background-color:#e0e0e0;
+}
+
+
+
+.dbRadioBut
+{
+    #width:1000px;
+    #height:300px;
+    #background: url(radioBut.png) no-repeat;
+}
+
+
+input[type=radio].dbRadioBut {
+    display:none; 
+    margin:10px;
+}
+
+input[type=radio].dbRadioBut + label {
+    display:inline-block;
+    margin:-2px;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    #font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+    background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #b3b3b3;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+
+input[type=radio].dbRadioBut:checked + label { 
+       background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+        background-color:#e0e0e0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

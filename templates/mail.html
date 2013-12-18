@@ -1,0 +1,34 @@
+
+
+
+
+{% extends "base.html" %}
+
+
+
+
+
+{% block content %}
+
+    {% load static %}
+    <div class="textBoxContent">
+        Le mail à envoyer :
+    </div>
+    
+    <div class="textBoxContent"  id="tocopy">
+        <img id="clipboard" width="30" height="30" src="{% static 'clipboard.png' %}"  />
+        Cliquer pour copier le mail dans le presse papier.
+    </div>
+
+    <div class="textBoxContent">
+        <p id="tobecopy">{% for l in mail %}{{l}}<br>{% endfor %}</p>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
