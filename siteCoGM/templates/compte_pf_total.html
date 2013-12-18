@@ -1,0 +1,28 @@
+
+
+
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+    <div class="textBoxContent">
+        Le compte total :
+    </div>
+    
+    <div class="textBoxContent">
+        {% for l in compte %}
+            {{l}}<br>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+

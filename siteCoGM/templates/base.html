@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mystyle.css' %}" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="{% static 'jsFunction.js' %}"></script>
+    <script language="javascript"> var MEDIA_URL = "{{ MEDIA_URL }}";</script>
+    <script type="text/javascript" src="{% static 'jquery.zclip.js' %}"></script>
+</head>
+
+
+
+
+
+
+<body>
+
+
+    <div id="header">
+        <img id="logo" src="{% static 'foe.PNG' %}"  />
+        <p style="font-size:40px;padding-left:300px;">
+            Le site de la CoGM !
+        <p>
+    </div>
+
+
+
+
+    <div id="content" >
+        {% block content %}{% endblock %}
+    </div>
+
+
+
+
+
+
+</body>
+
+
+
+</html>
