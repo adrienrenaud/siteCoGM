@@ -132,4 +132,4 @@ STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, 'siteCoGM/static'),
 )
 
-# AWS_PRELOAD_METADATA = True
+AWS_PRELOAD_METADATA = True
