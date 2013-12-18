@@ -72,7 +72,8 @@ def do_nGM(pls,sp,ea,df,f):
 def mySave(name, plt):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.pdf'))
-    plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.png'))
+    # plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.png'))
+    plt.savefig(os.path.join(BASE_DIR, 'static/results', name+'.png'))
     
     
 
