@@ -123,11 +123,7 @@ ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 import os
-# BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-# print BASE_DIR
 
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# print "foooo", BASE_DIR
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
