@@ -125,7 +125,7 @@ ALLOWED_HOSTS = ['*']
 import os
 
 
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
