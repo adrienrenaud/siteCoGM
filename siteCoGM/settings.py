@@ -137,3 +137,5 @@ STATICFILES_DIRS = (
 )
 
 
+foo = "bar"*5
+print foo
