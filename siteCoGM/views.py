@@ -16,12 +16,15 @@ def hello(request):
 
 def test(request):
     argDict = {'request':request,}
-    return render_to_response('index.html', argDict, context_instance=RequestContext(request))
+    return render_to_response('test.html', argDict, context_instance=RequestContext(request))
 
 def homepage_view(request):
     argDict = {'request':request,}
     return render_to_response('homepage.html', argDict, context_instance=RequestContext(request))
     
+def about(request):
+    argDict = {'request':request,}
+    return render_to_response('about.html', argDict, context_instance=RequestContext(request))
     
         
 def compte_pf_detail(request):
@@ -55,8 +58,8 @@ def page_mail(request):
     
 class ajoutGMForm(forms.Form):
     password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    dataGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 2}))     
-    pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 30}))
+    dataGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 2}))     
+    pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))
     def clean_password(self):
         password = self.cleaned_data['password']
         if password != "marignan1515":
@@ -154,7 +157,7 @@ def update_compte_total_mail():
 
 class modifyDetailForm(forms.Form):
     password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 100, 'rows': 30}))  
+    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))  
     def clean_password(self):
         password = self.cleaned_data['password']
         if password != "marignan1515":

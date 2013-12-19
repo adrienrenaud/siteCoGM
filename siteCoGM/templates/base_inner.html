@@ -29,7 +29,7 @@
 	<nav>
 		<ul>
 			<li class="selected"><a href="/CoGM">Home</a></li>
-			<li><a href="/CoGM/about">About</a></li>
+			<li><a href="#">About</a></li>
 		</ul>
 	</nav>
 	
@@ -38,7 +38,7 @@
 			<h2>Développement collaboratif des Grands Monuments</h2>
 		</header>
 		<p>La CoGM organise un développement collaboratif des Grands Monuments (GM) de la guilde Brisgard Trade Union (BTU).</p>
-		<img src="{% static 'images/logo_forge_of_empires.jpg' %}"  alt="lime" />
+		<img src="{% static 'foe.PNG' %}"  alt="lime" />
 	</section>
 
     <!--<div id="header">-->
@@ -51,10 +51,10 @@
 
 
 
-
+    <section id="content" >
         {% block content %}{% endblock %}
+    </section>
 
-        {% block aside %}{% endblock %}
 
 
 
@@ -62,15 +62,9 @@
 
 	<footer>
     <section>
-    <h3>Technical description</h3>
-    <p>
-        Site designed on  <a href="https://koding.com" title="koding">koding.com</a>.
-        Using the <a href="https://www.djangoproject.com/" title="django">Django</a> framework,
-        and css coffeecols templates from <a href="http://freehtml5templates.com/" title="freehtml5templates">freehtml5templates.com</a>.
-        Site hosted by <a href="https://www.heroku.com/" title="heroku">heroku.com</a>.
-        
-    </p>
-    <p>Next line here</p>
+    <!--<h3>Left Stuff</h3>-->
+    <!--<p>Left aligned text here. Proin metus odio, ultricies eu pharetra dictum, laoreet id odio. Curabitur in odio augue. Morbi congue auctor interdum. Phasellus sit amet metus justo.</p>-->
+    <!--<p>Next line here</p>-->
     </section>
     
     <section>
@@ -81,7 +75,7 @@
     
     <section>
     <h3>Stuff</h3>
-    <p>&copy; 2013 <a href="/CoGM" title="ajavewebsite">ajavewebsite.com</a> All rights reserved.</p>
+    <p>&copy; 2013 <a href="/CoGM" title="your site name">ajavewebsite.com</a> All rights reserved.</p>
     <p> Vers l'infini et au delà ! </p>
     </section>
 

@@ -7,28 +7,33 @@
 
 {% block content %}
 
+	<div id="innercontent">
 
-
-    <div class="textBoxContent">
-        Modifier le detail :
-    </div>
-
-{% if form.errors %}
-        <p style="color: red;">
-            Please correct the error{{ form.errors|pluralize }} below.
-        </p>
-    {% endif %}
-
-
-    <div class="textBoxContent">
-
-    <form action="" method="post">
-        <table>
-            {{ form.as_table }}
-        </table>
-        {% csrf_token %}
-        <input type="submit" value="Submit">
-    </form> 
+		<article class="articlecontent">
+			<header>
+				<h2> Modifier le detail :</h2>
+			</header>
+            <p>
+                {% if form.errors %}
+                        <p style="color: red;">
+                            Please correct the error{{ form.errors|pluralize }} below.
+                        </p>
+                    {% endif %}
+                
+                
+                <div class="textBoxContent">
+                
+                    <form action="" method="post">
+                        <table>
+                            {{ form.as_table }}
+                        </table>
+                        {% csrf_token %}
+                        <input type="submit" value="Submit">
+                    </form> 
+            
+                </div>
+            </p>
+		</article>
 
     </div>
 
@@ -37,6 +42,10 @@
 
 
 
+{% block aside %}
 
+    {% include 'aside.html' %}
+
+{% endblock %}
 
 

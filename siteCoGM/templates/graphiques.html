@@ -8,24 +8,27 @@
 {% block content %}
 
     {% load static %}
+	<div id="innercontent">
+    
+    
+		<article class="articlecontent">
+			<header>
+				<h2> Les graphiques :</h2>
+			</header>
+            <p>
+                {% for graph_name in graph_names %}
+                
+                    <div id="graphique" class="textBoxContent">
+                        {{ graph_name }} <br>
+                        <img id="nGM" src="{% static 'results/'|add:graph_name|add:'.png' %}" width="600"  />
+                        <!--<img id="nGM" src="{% static 'results/nGM.png' %}"  />-->
+                    </div>
+                {% endfor%}
+            </p>
+		</article>
+    
 
-    
-    <div class="textBoxContent">
-        Les graphiques :
     </div>
-    
-    
-    
-    {% for graph_name in graph_names %}
-    
-    <div id="graphique" class="textBoxContent">
-        {{ graph_name }} <br>
-        <img id="nGM" src="{% static 'results/'|add:graph_name|add:'.png' %}"  />
-        <!--<img id="nGM" src="{% static 'results/nGM.png' %}"  />-->
-    </div>
-    
-    {% endfor%}
-
 {% endblock %}
 
 
@@ -34,3 +37,8 @@
 
 
 
+{% block aside %}
+
+    {% include 'aside.html' %}
+
+{% endblock %}

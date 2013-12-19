@@ -6,35 +6,46 @@
 
 
 {% block content %}
-
-    <div class="textBoxContent">
-        Mettre à jour les graphiques :
-    </div>
-    
-    
-    
-    <div class="textBoxContent">
-        {% if form.errors %}
-            <p style="color: red;">
-                Please correct the error{{ form.errors|pluralize }} below.
+	<div id="innercontent">
+	
+	
+		<article class="articlecontent">
+			<header>
+				<h2> Mettre à jour les graphiques :</h2>
+			</header>
+            <p>
+                <div class="textBoxContent">
+                    {% if form.errors %}
+                        <p style="color: red;">
+                            Please correct the error{{ form.errors|pluralize }} below.
+                        </p>
+                    {% endif %}
+                
+                    <form action="" method="post">
+                        <table>
+                            {{ form.as_table }}
+                        </table>
+                        {% csrf_token %}
+                        <input type="submit" value="Submit">
+                    </form> 
+                </div>
             </p>
-        {% endif %}
-    
-        <form action="" method="post">
-            <table>
-                {{ form.as_table }}
-            </table>
-            {% csrf_token %}
-            <input type="submit" value="Submit">
-        </form> 
+		</article>
+	
+	
+	
+	
     </div>
-    
     
 {% endblock %}
 
 
 
 
+{% block aside %}
 
+    {% include 'aside.html' %}
+
+{% endblock %}
 
 

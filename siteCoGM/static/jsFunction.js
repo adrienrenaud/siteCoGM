@@ -12,6 +12,10 @@ $(document).ready(function(){
         $(location).attr('href',theurl);
     });
     
+    //     $("#tocopy").click(function(){
+    //     var theurl = "/CoGM/";
+    //     $(location).attr('href',theurl);
+    // });
     
     $('#tocopy').zclip({
         path: "http://www.steamdev.com/zclip/js/ZeroClipboard.swf",

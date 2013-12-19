@@ -7,36 +7,39 @@
 
 {% block content %}
 
-
-
-    <div class="textBoxContent">
-        Ajouter un GM :
-    </div>
-    
+	<div id="innercontent">
 
 
 
-    <div class="textBoxContent">
-        {% if form.errors %}
-            <p style="color: red;">
-                Please correct the error{{ form.errors|pluralize }} below.
+	    <article class="articlecontent">
+			<header>
+				<h2> Ajouter un GM :</h2>
+			</header>
+            <p>
+                {% if form.errors %}
+                    <p style="color: red;">
+                        Please correct the error{{ form.errors|pluralize }} below.
+                    </p>
+                {% endif %}
+            
+                <form action="" method="post">
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                    {% csrf_token %}
+                    <input type="submit" value="Submit">
+                </form> 
             </p>
-        {% endif %}
-    
-        <form action="" method="post">
-            <table>
-                {{ form.as_table }}
-            </table>
-            {% csrf_token %}
-            <input type="submit" value="Submit">
-        </form> 
-        
+		</article>
+
     </div>
-
-
 {% endblock %}
 
+{% block aside %}
 
+    {% include 'aside.html' %}
+
+{% endblock %}
 
 
 

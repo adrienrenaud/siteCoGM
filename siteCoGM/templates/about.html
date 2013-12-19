@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+	<div id="innercontent">
+		<article class="articlecontent">
+			<header>
+				<h2>A propos de la CoGM :</h2>
+			</header>
+            <p>
+
+
+                <p>
+                La CoGM organise un développement collaboratif des Grands Monuments (GM) de la guilde Brisgard Trade Union (BTU).
+                </p>
+                
+                <h3>Règles de la CoGM :</h3>
+                Tous les membres dépensent 3 points de forge (pf) par jour sur un même GM jusqu'à ce qu'il passe au niveau suivant. On change alors de GM et tout les membres continuent à dépenser 3 pf par jour sur le nouveau GM. <br>
+                Un compte des pf dépensés et reçus par chaque membre est tenu dans le sujet ‘CoGM – compte Points de Forge’ sur le forum de la BTU. <br>
+                Ce compte permet de définir un solde pour chaque joueur : la différence entre les pf dépensé et les pf reçus. A chaque changement de GM, le nouveau GM est choisi chez le membre ayant le plus grand solde.<br>
+                
+                
+                <h3>Gestion et utilisation du compte des pf :</h3>
+                Le solde des joueurs est calculé grâce aux informations représentées dans la partie ‘Details’ du compte des pf.<br>
+                Ces données sont analysées par un programme informatique (écrit en langage Python) qui calcule le solde des joueurs et écrit la partie ‘Total’ du compte des pf. <br>
+                Ce programme écrit aussi le mail envoyé à chaque augmentation de GM et il produit les graphiques de ce document.<br>
+
+
+            </p>
+		</article>
+    
+
+    </div>
+{% endblock %}
+
+
+
+
+{% block aside %}
+
+    {% include 'aside.html' %}
+
+{% endblock %}

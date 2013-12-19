@@ -7,22 +7,29 @@
 
 {% block content %}
 
-
-    <div class="textBoxContent">
-        Le détail compte :
-    </div>
+	<div id="innercontent">
+		<article class="articlecontent">
+			<header>
+				<h2> Le détail compte :</h2>
+			</header>
+            <p>
+                {% for l in compte %}
+                    {{l}}<br>
+                {% endfor %}
+            </p>
+		</article>
     
-    <div class="textBoxContent">
-        {% for l in compte %}
-            {{l}}<br>
-        {% endfor %}
-    </div>
 
+    </div>
 {% endblock %}
 
 
 
 
+{% block aside %}
 
+    {% include 'aside.html' %}
+
+{% endblock %}
 
 

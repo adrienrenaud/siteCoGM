@@ -11,24 +11,39 @@
 {% block content %}
 
     {% load static %}
-    <div class="textBoxContent">
-        Le mail à envoyer :
-    </div>
     
-    <div class="textBoxContent"  id="tocopy">
-        <img id="clipboard" width="30" height="30" src="{% static 'clipboard.png' %}"  />
-        Cliquer pour copier le mail dans le presse papier.
+	<div id="innercontent">
+	
+	
+		<article class="articlecontent">
+			<header>
+				<h2> Le mail à envoyer :</h2>
+			</header>
+            <p>
+                <div class="textBoxContent"  >
+                    <img id="tocopy"  width="30" height="30" src="{% static 'clipboard.png' %}"  />
+                    &nbsp; Cliquer sur l'image pour copier le mail dans le presse papier.
+                </div>
+            
+                <p>
+                <p>
+                <div class="textBoxContent">
+                    <p id="tobecopy">{% for l in mail %}{{l}}<br>{% endfor %}</p>
+                </div>
+            </p>
+		</article>
+		
+		
     </div>
-
-    <div class="textBoxContent">
-        <p id="tobecopy">{% for l in mail %}{{l}}<br>{% endfor %}</p>
-    </div>
-
 {% endblock %}
 
 
 
+{% block aside %}
 
+    {% include 'aside.html' %}
+
+{% endblock %}
 
 
 

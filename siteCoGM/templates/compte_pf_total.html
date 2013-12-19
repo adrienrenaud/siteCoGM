@@ -6,17 +6,27 @@
 
 
 {% block content %}
+	<div id="innercontent">
 
-
-    <div class="textBoxContent">
-        Le compte total :
-    </div>
+		<article class="articlecontent">
+			<header>
+					<h2> Le compte total :</h2>
+			</header>
+            <p>
+                {% for l in compte %}
+                    {{l}}<br>
+                {% endfor %}
+            </p>
+		</article>
     
-    <div class="textBoxContent">
-        {% for l in compte %}
-            {{l}}<br>
-        {% endfor %}
     </div>
+
+{% endblock %}
+
+
+{% block aside %}
+
+    {% include 'aside.html' %}
 
 {% endblock %}
 
