@@ -13,6 +13,11 @@ def hello(request):
 ################################################
 ########### homepage du site
 ################################################
+
+def test(request):
+    argDict = {'request':request,}
+    return render_to_response('index.html', argDict, context_instance=RequestContext(request))
+
 def homepage_view(request):
     argDict = {'request':request,}
     return render_to_response('homepage.html', argDict, context_instance=RequestContext(request))
@@ -149,7 +154,7 @@ def update_compte_total_mail():
 
 class modifyDetailForm(forms.Form):
     password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 150, 'rows': 30}))  
+    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 100, 'rows': 30}))  
     def clean_password(self):
         password = self.cleaned_data['password']
         if password != "marignan1515":

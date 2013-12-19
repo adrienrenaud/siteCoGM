@@ -1,41 +1,113 @@
-
-
-
-
 {% extends "base.html" %}
 
+{% load static %}
 
 {% block content %}
 
 
-    <div class="textBoxContent">
-    Lien vers le détail du compte :  <a class="linkColor" href="/CoGM/compte_pf_detail/"> ici </a>
-    </div>
 
-    <div class="textBoxContent">
-    Lien vers le total du compte :  <a class="linkColor" href="/CoGM/compte_pf_total/"> ici </a>
-    </div>
+    <!--<div class="textBoxContent">-->
+    <!--Lien vers le détail du compte :  <a class="linkColor" href="/CoGM/compte_pf_detail/"> ici </a>-->
+    <!--</div>-->
 
-    <div class="textBoxContent">
-    Lien pour ajouter un GM dans le détail du compte, le compte total et le mail seront alors mis à jour automatiquement : 
-    <a class="linkColor" href="/CoGM/ajout_GM/"> ici </a>
-    </div>
+    <!--<div class="textBoxContent">-->
+    <!--Lien vers le total du compte :  <a class="linkColor" href="/CoGM/compte_pf_total/"> ici </a>-->
+    <!--</div>-->
 
-    <div class="textBoxContent">
-    Lien pour modifier directement le détail du compte, le compte total et le mail seront alors mis à jour automatiquement :  <a class="linkColor" href="/CoGM/modify_compte_detail/"> ici </a>
-    </div>  
+    <!--<div class="textBoxContent">-->
+    <!--Lien pour ajouter un GM dans le détail du compte, le compte total et le mail seront alors mis à jour automatiquement : -->
+    <!--<a class="linkColor" href="/CoGM/ajout_GM/"> ici </a>-->
+    <!--</div>-->
+
+    <!--<div class="textBoxContent">-->
+    <!--Lien pour modifier directement le détail du compte, le compte total et le mail seront alors mis à jour automatiquement :  <a class="linkColor" href="/CoGM/modify_compte_detail/"> ici </a>-->
+    <!--</div>  -->
     
-    <div class="textBoxContent">
-    Lien vers le mail à envoyer <a class="linkColor" href="/CoGM/mail/"> ici </a>
-    </div>
+    <!--<div class="textBoxContent">-->
+    <!--Lien vers le mail à envoyer <a class="linkColor" href="/CoGM/mail/"> ici </a>-->
+    <!--</div>-->
     
-    <div class="textBoxContent">
-    Lien pour mettre à jour les graphiques <a class="linkColor" href="/CoGM/mise_a_jour_graph/"> ici </a>
-    </div>
+    <!--<div class="textBoxContent">-->
+    <!--Lien pour mettre à jour les graphiques <a class="linkColor" href="/CoGM/mise_a_jour_graph/"> ici </a>-->
+    <!--</div>-->
     
-    <div class="textBoxContent">
-    Lien vers les graphiques <a class="linkColor" href="/CoGM/graphiques/"> ici </a>
-    </div>
+    <!--<div class="textBoxContent">-->
+    <!--Lien vers les graphiques <a class="linkColor" href="/CoGM/graphiques/"> ici </a>-->
+    <!--</div>-->
+
+
+
+	<!--<section id="content">-->
+				<ul class="column">
+				    <!--eqblock-->
+				    <li>
+				        <section class="block">
+									<a href="/CoGM/compte_pf_detail/"><img src="{% static 'images/philosopy.jpg' %}" alt=""  /></a> 
+										<h2><a href="/CoGM/compte_pf_detail/">Détail du compte</a></h2> 
+										<p>Lien vers le détail du compte.</p> 
+				        </section>
+				    </li>
+
+				    <!--eqblock-->
+				    <li>
+				        <section class="block">
+									<a href="/CoGM/compte_pf_total/"><img src="{% static 'images/bill_pay.jpg' %}" alt=""  /></a> 
+										<h2><a href="/CoGM/compte_pf_total/">Compte total</a></h2> 
+										<p>Lien vers le compte total. </p> 
+				        </section>
+				    </li>
+
+				    <!--eqblock-->
+				    <li>
+				        <section class="block">
+									<a href="/CoGM/ajout_GM"><img src="{% static 'images/basilius.png' %}" alt=""  /></a> 
+										<h2><a href="/CoGM/ajout_GM">Ajouter un GM</a></h2> 
+										<p>Lien pour ajouter un GM dans le détail du compte, le compte total et le mail seront alors mis à jour automatiquement.</p> 
+				        </section>
+				    </li>
+
+				    <!--eqblock-->
+				    <li>
+				        <section class="block">
+									<a href="/CoGM/modify_compte_detail/"><img src="{% static 'images/hand-Writing.jpg' %}" alt=""  /></a> 
+										<h2><a href="/CoGM/modify_compte_detail/">Modifier le détail</a></h2> 
+										<p>Lien pour modifier directement le détail du compte, le compte total et le mail seront alors mis à jour automatiquement. </p> 
+				        </section>
+				    </li>
+
+				    <!--eqblock-->
+				    <li>
+				        <section class="block">
+									<a href="/CoGM/mail/"><img src="{% static 'images/envelope-mail2.png' %}" alt=""  /></a> 
+										<h2><a href="/CoGM/mail/">Le mail à envoyer </a></h2> 
+										<p>Lien vers le mail à envoyer.  </p> 
+				        </section>
+				    </li>
+
+				    <!--eqblock-->
+				    <li>
+				        <section class="block">
+									<a href="/CoGM/graphiques"><img src="{% static 'images/paintpic.JPG' %}" alt=""  /></a> 
+										<h2><a href="/CoGM/graphiques">Les graphiques</a></h2> 
+										<p>Lien vers les graphiques.  </p> 
+				        </section>
+				    </li>
+
+				    <!--eqblock-->
+				    <li>
+				        <section class="block" href="/CoGM/mise_a_jour_graph/">
+									<a href="/CoGM/mise_a_jour_graph/"><img src="{% static 'images/paintpic.JPG' %}" alt=""  /></a> 
+										<h2><a href="/CoGM/mise_a_jour_graph/">Mettre à jour les graphiques</a></h2> 
+										<p>Lien pour mettre à jour les graphiques. </p> 
+				        </section>
+				    </li>
+				</ul>
+		<!--</section>-->
+
+
+
+
+
 
 {% endblock %}
 
