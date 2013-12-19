@@ -1,3 +1,5 @@
+{% load google_analytics %}
+
 <!DOCTYPE html>
 <html>
 
@@ -14,6 +16,7 @@
     <script type="text/javascript" src="{% static 'jquery.zclip.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/equalcolumns.js' %}"></script> 
     <script type="text/javascript" src="{% static 'jsFunction.js' %}"></script>
+    {% google_analytics %}
 </head>
 
 
@@ -40,13 +43,6 @@
 		<p>La CoGM organise un développement collaboratif des Grands Monuments (GM) de la guilde Brisgard Trade Union (BTU).</p>
 		<img src="{% static 'images/logo_forge_of_empires.jpg' %}"  alt="lime" />
 	</section>
-
-    <!--<div id="header">-->
-    <!--    <img id="logo" src="{% static 'foe.PNG' %}"  />-->
-    <!--    <p style="font-size:40px;padding-left:300px;">-->
-    <!--        Le site de la CoGM !-->
-    <!--    <p>-->
-    <!--</div>-->
 
 
 
