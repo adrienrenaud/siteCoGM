@@ -22,10 +22,11 @@ body {
 	border-style: solid;
 	border-color: black;
     border:none;
+    background: #271408 url("baguette.jpg") repeat;
 }
 
 #content {
-   background-color: white;
+    background-color: white;
     position: absolute; 
     top: 0px;
     left: 0px;
