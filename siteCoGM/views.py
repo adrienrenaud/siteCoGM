@@ -29,7 +29,7 @@ def about(request):
         
 def compte_pf_detail(request):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
     fin = open(pfile,"r")
     ls = fin.readlines() 
     argDict = {'request':request, 'compte':ls,}
@@ -38,7 +38,7 @@ def compte_pf_detail(request):
     
 def compte_pf_total(request):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_total.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_total.txt')
     fin = open(pfile,"r")
     ls = fin.readlines() 
     argDict = {'request':request, 'compte':ls,}
@@ -47,7 +47,7 @@ def compte_pf_total(request):
     
 def page_mail(request):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_mail.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_mail.txt')
     fin = open(pfile,"r")
     ls = fin.readlines() 
     argDict = {'request':request, 'mail':ls,}
@@ -115,7 +115,7 @@ Sophia, emilieleo , niv 4"""
     
 def update_compte_detail(info):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
     with open(pfile, 'r') as file:
        data = file.readlines()
     newGM = info['dataGM'] + "\n"
@@ -128,7 +128,7 @@ def update_compte_detail(info):
        
 def update_compte_total_mail():
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
     fin = open(pfile,"r")
     ls = fin.readlines()   
     f = clean_list(ls)
@@ -143,12 +143,12 @@ def update_compte_total_mail():
     compte = print_compte(pls,sp,ea,df,f)
     mail = print_mail(pls,sp,ea,df,f)
     
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_total.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_total.txt')
     with open(pfile, 'w') as file:
         for l in compte:
             file.write(l+"\n")
             
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_mail.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_mail.txt')
     with open(pfile, 'w') as file:
         for l in mail:
             file.write(l+"\n")
@@ -167,7 +167,7 @@ class modifyDetailForm(forms.Form):
   
 def modify_compte_detail(request):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
     
     if request.method == 'POST':
         form = modifyDetailForm(request.POST)
@@ -213,7 +213,7 @@ def mise_a_jour_graph(request):
     
 def do_mise_a_jour_graph():
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
+    pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
     fin = open(pfile,"r")
     ls = fin.readlines()   
     f = clean_list(ls)
