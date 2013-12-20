@@ -124,6 +124,9 @@ def update_compte_detail(info):
     data.insert(4,newGM)
     with open(pfile, 'w') as file:
        file.writelines(data)
+    pfile = os.path.join(BASE_DIR, 'siteCoGM/static/raw_txt/raw_compte_pf_detail.txt')
+    with open(pfile, 'w') as file:
+        file.writelines(data)
        
        
 def update_compte_total_mail():
@@ -147,8 +150,16 @@ def update_compte_total_mail():
     with open(pfile, 'w') as file:
         for l in compte:
             file.write(l+"\n")
+    pfile = os.path.join(BASE_DIR, 'siteCoGM/static/raw_txt/raw_compte_pf_total.txt')
+    with open(pfile, 'w') as file:
+        for l in compte:
+            file.write(l+"\n")
             
     pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_mail.txt')
+    with open(pfile, 'w') as file:
+        for l in mail:
+            file.write(l+"\n")
+    pfile = os.path.join(BASE_DIR, 'siteCoGM/static/raw_txt/raw_mail.txt')
     with open(pfile, 'w') as file:
         for l in mail:
             file.write(l+"\n")
@@ -168,13 +179,16 @@ class modifyDetailForm(forms.Form):
 def modify_compte_detail(request):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
+    pfile2 = os.path.join(BASE_DIR, 'siteCoGM/static/raw_txt/raw_compte_pf_detail.txt')
     
     if request.method == 'POST':
         form = modifyDetailForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             with open(pfile, 'w') as file:
-                 file.write(cd['detail'])
+                file.write(cd['detail'])
+            with open(pfile2, 'w') as file:
+                file.write(cd['detail'])
             update_compte_total_mail()
             return HttpResponseRedirect('/CoGM/')
     else:
