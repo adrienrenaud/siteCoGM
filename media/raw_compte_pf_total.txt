@@ -1,0 +1,110 @@
+----------------------------------------
+----------------------------------------
+TOTAL :
+----------------------------------------
+::: depense :
+adrienR : 100002400 pf
+ayor85 : 184 pf
+bar : 0 pf
+bravevolonte : 149 pf
+canardmalin82 : 245 pf
+chefcooker94 : 252 pf
+david59300 : 11 pf
+emilieleo : 143 pf
+fifi7489 : 257 pf
+fladous : 50 pf
+foo : 0 pf
+gadym : 51 pf
+groswill : 3 pf
+guibassim : 68 pf
+idunn08 : 84 pf
+jujus94 : 12 pf
+locky81 : 26 pf
+onclepotiron : 413 pf
+ramoutch16 : 354 pf
+rg68 : 148 pf
+seb123 : 331 pf
+shadowpleague : 373 pf
+shawnee : 301 pf
+sinquem : 165 pf
+sloulou : 284 pf
+tctpfik : 11 pf
+tiousmi35 : 378 pf
+toto : 0 pf
+yamaod : 200 pf
+yoyo34540 : 26 pf
+zeux123 : 241 pf
+- - - - - - - - - 
+somme : 100007160
+----------------------------------------
+::: recu :
+adrienR : 430 pf
+ayor85 : 83 pf
+bar : 0 pf
+bravevolonte : 142 pf
+canardmalin82 : 269 pf
+chefcooker94 : 236 pf
+david59300 : 0 pf
+emilieleo : 100002338 pf
+fifi7489 : 269 pf
+fladous : 100 pf
+foo : 0 pf
+gadym : 160 pf
+groswill : 0 pf
+guibassim : 49 pf
+idunn08 : 131 pf
+jujus94 : 0 pf
+locky81 : 0 pf
+onclepotiron : 465 pf
+ramoutch16 : 304 pf
+rg68 : 99 pf
+seb123 : 281 pf
+shadowpleague : 324 pf
+shawnee : 276 pf
+sinquem : 145 pf
+sloulou : 293 pf
+tctpfik : 0 pf
+tiousmi35 : 347 pf
+toto : 0 pf
+yamaod : 207 pf
+yoyo34540 : 0 pf
+zeux123 : 212 pf
+- - - - - - - - - 
+somme : 100007160
+----------------------------------------
+::: depense - recu :
+adrienR : 100001970 pf
+ayor85 : 101 pf
+bar : 0 pf
+bravevolonte : 7 pf
+canardmalin82 : -24 pf
+chefcooker94 : 16 pf
+david59300 : 11 pf
+emilieleo : -100002195 pf
+fifi7489 : -12 pf
+fladous : -50 pf
+foo : 0 pf
+gadym : -109 pf
+groswill : 3 pf
+guibassim : 19 pf
+idunn08 : -47 pf
+jujus94 : 12 pf
+locky81 : 26 pf
+onclepotiron : -52 pf
+ramoutch16 : 50 pf
+rg68 : 49 pf
+seb123 : 50 pf
+shadowpleague : 49 pf
+shawnee : 25 pf
+sinquem : 20 pf
+sloulou : -9 pf
+tctpfik : 11 pf
+tiousmi35 : 31 pf
+toto : 0 pf
+yamaod : -7 pf
+yoyo34540 : 26 pf
+zeux123 : 29 pf
+- - - - - - - - - 
+somme : 0
+----------------------------------------
+----------------------------------------

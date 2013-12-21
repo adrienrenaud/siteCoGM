@@ -1,0 +1,52 @@
+
+
+
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+	<div id="innercontent">
+
+		<article class="articlecontent">
+			<header>
+				<h2> Modifier le remplissage par defaut :</h2>
+			</header>
+			<p> Vous pouvez modifier le remplissage par défaut qui vous est proposé lorsque vous ajoutez un GM.
+            <p>
+                {% if form.errors %}
+                        <p style="color: red;">
+                            Please correct the error{{ form.errors|pluralize }} below.
+                        </p>
+                    {% endif %}
+                
+                
+                <div class="textBoxContent">
+                
+                    <form action="" method="post">
+                        <table>
+                            {{ form.as_table }}
+                        </table>
+                        {% csrf_token %}
+                        <input type="submit" value="Submit">
+                    </form> 
+            
+                </div>
+            </p>
+		</article>
+
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block aside %}
+
+    {% include 'aside.html' %}
+
+{% endblock %}
+
+

@@ -4,6 +4,7 @@ from django.template import RequestContext
 import os
 from django import forms
 from django.core.files.storage import default_storage
+from datetime import datetime
 
 from helper_compte_pf import clean_list, compute_stuff, print_compte, print_mail
 
@@ -64,7 +65,7 @@ class ajoutGMForm(forms.Form):
     pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))
     def clean_password(self):
         password = self.cleaned_data['password']
-        if password != "marignan1515":
+        if password != "a":
             raise forms.ValidationError("Mauvais password !")
         return password
   
@@ -77,39 +78,19 @@ def ajout_GM(request):
             update_compte_total_mail()
             return HttpResponseRedirect('/CoGM/')
     else:
-        # file = default_storage.open('raw_default_gm.txt', 'r')
-        # ls = file.readlines()
-        # file.close()
-        initial_pf = """adrienR : 0 pf
-ayor85 : 0 pf
-bravevolonte : 0 pf
-canardmalin82 : 0 pf
-chefcooker94 : 0 pf
-david59300 : 0 pf
-emilieleo : 0 pf
-fifi7489 : 0 pf
-fladous : 0 pf
-gadym : 0 pf
-guibassim : 0 pf
-idunn08 : 0 pf
-jujus94 : 0 pf
-locky81 : 0 pf
-onclepotiron : 0 pf
-ramoutch16 : 0 pf
-rg68 : 0 pf
-tctpfik : 0 pf
-seb123 : 0 pf
-shadowpleague : 0 pf
-sinquem : 0 pf
-sloulou : 0 pf
-shawnee : 0 pf
-tiousmi35 : 0 pf
-yamaod : 0 pf
-yoyo34540 : 0 pf
-zeux123 : 0 pf"""
-        # initial_pf = ls
-        initial_dataGM = """debut 13/12/13
-Sophia, emilieleo , niv 4"""
+        file = default_storage.open('raw_default_gm.txt', 'r')
+        ls = file.readlines()
+        file.close()
+        initial_pf = ""
+        for l in ls:
+            initial_pf += l
+            
+        print [initial_pf]
+
+        print [initial_pf]
+        thedate = datetime.now().strftime("%d/%m/%y")
+        initial_dataGM = """debut %s 
+Sophia, emilieleo , niv 4"""%thedate
         form = ajoutGMForm(
             initial={'pf': initial_pf, 'dataGM': initial_dataGM}
         )
@@ -123,12 +104,17 @@ def update_compte_detail(info):
     with default_storage.open('raw_compte_pf_detail.txt', 'r') as file:
        data = file.readlines()
        
+    pf = info['pf']
+    while pf.endswith("\n") or pf.endswith("\r"):
+        pf = pf[:-len("\n")]
       
     newGM = info['dataGM'] + "\n"
-    newGM+= info['pf'] + "\n"
+    # newGM+= info['pf'] + "\n"
+    newGM+= pf + "\n"
     newGM+= "---------------------------------\n"
     data.insert(4,newGM)
     
+
     
     with default_storage.open('raw_compte_pf_detail.txt', 'w') as file:
        for l in data:
@@ -167,7 +153,7 @@ class modifyDetailForm(forms.Form):
     detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))  
     def clean_password(self):
         password = self.cleaned_data['password']
-        if password != "marignan1515":
+        if password != "a":
             raise forms.ValidationError("Mauvais password !")
         return password
 
@@ -198,12 +184,41 @@ def modify_compte_detail(request):
     argDict = {'request':request, 'form': form}
     return render_to_response('modify_compte_detail.html', argDict, context_instance=RequestContext(request))
     
+    
+    
+
+  
+def modify_ajout_gm(request):
+    if request.method == 'POST':
+        form = modifyDetailForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            with default_storage.open("raw_default_gm.txt", 'w') as file:
+                file.write(cd['detail'])
+            return HttpResponseRedirect('/CoGM/')
+    else:
+        with default_storage.open("raw_default_gm.txt", 'r') as file:
+            ls = file.readlines()
+        initial_detail = ""
+        for l in ls:
+            initial_detail += l
+        # while initial_detail.endswith("\n"):
+        #     initial_detail = initial_detail[:-len("\n")]
+        form = modifyDetailForm(
+            initial={'detail': initial_detail,}
+        )
+    
+    argDict = {'request':request, 'form': form}
+    return render_to_response('modify_ajout_gm.html', argDict, context_instance=RequestContext(request))
+    
+    
+    
 
 class miseAJourGraphForm(forms.Form):
     password = forms.CharField(max_length=32, widget=forms.PasswordInput)
     def clean_password(self):
         password = self.cleaned_data['password']
-        if password != "marignan1515":
+        if password != "a":
             raise forms.ValidationError("Mauvais password !")
         return password
 
