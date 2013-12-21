@@ -9,27 +9,28 @@ from datetime import datetime
 from helper_compte_pf import clean_list, compute_stuff, print_compte, print_mail
 
 
-def hello(request):
-    return HttpResponse("Hello world")
-    
-    
-################################################
-########### homepage du site
-################################################
 
-def test(request):
-    argDict = {'request':request,}
-    return render_to_response('test.html', argDict, context_instance=RequestContext(request))
+
+    
+
+    
+        
+        
+        
+################################################
+########### homepage, comptes, mail
+################################################
 
 def homepage_view(request):
     argDict = {'request':request,}
     return render_to_response('homepage.html', argDict, context_instance=RequestContext(request))
     
+    
 def about(request):
     argDict = {'request':request,}
     return render_to_response('about.html', argDict, context_instance=RequestContext(request))
-    
-        
+
+
 def compte_pf_detail(request):
     # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     # pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
@@ -57,7 +58,21 @@ def page_mail(request):
     argDict = {'request':request, 'mail':ls,}
     return render_to_response('mail.html', argDict, context_instance=RequestContext(request))
     
+################################################
+################################################
+################################################
     
+    
+    
+    
+    
+    
+    
+    
+    
+################################################
+########### ajout GM
+################################################
     
 class ajoutGMForm(forms.Form):
     password = forms.CharField(max_length=32, widget=forms.PasswordInput)
@@ -65,9 +80,10 @@ class ajoutGMForm(forms.Form):
     pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))
     def clean_password(self):
         password = self.cleaned_data['password']
-        if password != "a":
+        if password !=  os.environ.get('MY_COGM_PASSWORD'):
             raise forms.ValidationError("Mauvais password !")
         return password
+  
   
 def ajout_GM(request):
     if request.method == 'POST':
@@ -85,9 +101,6 @@ def ajout_GM(request):
         for l in ls:
             initial_pf += l
             
-        print [initial_pf]
-
-        print [initial_pf]
         thedate = datetime.now().strftime("%d/%m/%y")
         initial_dataGM = """debut %s 
 Sophia, emilieleo , niv 4"""%thedate
@@ -98,23 +111,28 @@ Sophia, emilieleo , niv 4"""%thedate
     argDict = {'request':request, 'form': form}
     return render_to_response('ajout_GM.html', argDict, context_instance=RequestContext(request))
     
-    
+
+
+
+
+
+
+
+################################################
+########### update comptes
+################################################
     
 def update_compte_detail(info):
     with default_storage.open('raw_compte_pf_detail.txt', 'r') as file:
        data = file.readlines()
-       
     pf = info['pf']
     while pf.endswith("\n") or pf.endswith("\r"):
         pf = pf[:-len("\n")]
       
     newGM = info['dataGM'] + "\n"
-    # newGM+= info['pf'] + "\n"
     newGM+= pf + "\n"
     newGM+= "---------------------------------\n"
     data.insert(4,newGM)
-    
-
     
     with default_storage.open('raw_compte_pf_detail.txt', 'w') as file:
        for l in data:
@@ -126,16 +144,11 @@ def update_compte_total_mail():
         ls = file.readlines()   
     f = clean_list(ls)
 
-
     ### calcul des pf depenses, recus, etc... ####
     pls,sp,ea,df,f = compute_stuff(f)
-
-
     ### afficher le resultat selon les arguments : soit compte, soit mail, soit graphiques ###
     compte = print_compte(pls,sp,ea,df,f)
     mail = print_mail(pls,sp,ea,df,f)
-    
-
     
     with default_storage.open('raw_compte_pf_total.txt', 'w') as file:
         for l in compte:
@@ -148,21 +161,26 @@ def update_compte_total_mail():
 
 
 
+
+
+
+
+
+################################################
+########### Modifier le detail du compte
+################################################
+
 class modifyDetailForm(forms.Form):
     password = forms.CharField(max_length=32, widget=forms.PasswordInput)
     detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))  
     def clean_password(self):
         password = self.cleaned_data['password']
-        if password != "a":
+        if password != os.environ.get('MY_COGM_PASSWORD'):
             raise forms.ValidationError("Mauvais password !")
         return password
 
   
 def modify_compte_detail(request):
-    # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    # pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
-    # pfile2 = os.path.join(BASE_DIR, 'siteCoGM/static/raw_txt/raw_compte_pf_detail.txt')
-    
     if request.method == 'POST':
         form = modifyDetailForm(request.POST)
         if form.is_valid():
@@ -186,7 +204,14 @@ def modify_compte_detail(request):
     
     
     
-
+    
+    
+    
+    
+    
+################################################
+########### modidier ajout GM
+################################################
   
 def modify_ajout_gm(request):
     if request.method == 'POST':
@@ -202,8 +227,6 @@ def modify_ajout_gm(request):
         initial_detail = ""
         for l in ls:
             initial_detail += l
-        # while initial_detail.endswith("\n"):
-        #     initial_detail = initial_detail[:-len("\n")]
         form = modifyDetailForm(
             initial={'detail': initial_detail,}
         )
@@ -213,14 +236,24 @@ def modify_ajout_gm(request):
     
     
     
+    
+    
+    
+    
+    
+    
+################################################
+########### graphics
+################################################
 
 class miseAJourGraphForm(forms.Form):
     password = forms.CharField(max_length=32, widget=forms.PasswordInput)
     def clean_password(self):
         password = self.cleaned_data['password']
-        if password != "a":
+        if password != os.environ.get('MY_COGM_PASSWORD'):
             raise forms.ValidationError("Mauvais password !")
         return password
+
 
 def mise_a_jour_graph(request):
     if request.method == 'POST':
@@ -246,8 +279,6 @@ def do_mise_a_jour_graph():
     do_graph(pls,sp,ea,df,f)
     
     
-
-
 def graphiques(request):
     graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
     # graph_names = ['nGM',]

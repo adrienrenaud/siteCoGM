@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from siteCoGM.views import homepage_view, about, compte_pf_detail, compte_pf_total, ajout_GM, page_mail, modify_compte_detail, mise_a_jour_graph, graphiques, modify_ajout_gm
-from siteCoGM.views import hello, test
+
 
 from django.contrib import admin
 admin.autodiscover()
@@ -9,8 +9,6 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'mysite.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^hello/$', hello),
-    url(r'^test/$', test),
     url(r'^CoGM/$', homepage_view),
     url(r'^CoGM/about/$', about),
     url(r'^CoGM/compte_pf_detail/$', compte_pf_detail),
