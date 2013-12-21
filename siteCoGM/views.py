@@ -124,8 +124,11 @@ def update_compte_detail(info):
     newGM+= info['pf'] + "\n"
     newGM+= "---------------------------------\n"
     data.insert(4,newGM)
+    
+    
     with default_storage.open('raw_compte_pf_detail.txt', 'w') as file:
-       file.writelines(data)
+       for l in data:
+            file.write(l)
        
        
 def update_compte_total_mail():
@@ -142,8 +145,7 @@ def update_compte_total_mail():
     compte = print_compte(pls,sp,ea,df,f)
     mail = print_mail(pls,sp,ea,df,f)
     
-    
-    print compte
+
     
     with default_storage.open('raw_compte_pf_total.txt', 'w') as file:
         for l in compte:

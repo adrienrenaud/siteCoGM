@@ -163,6 +163,5 @@ STATIC_URL = S3_URL + 'static/'
 AWS_REDUCED_REDUNDANCY = False # We enable this server-wide on our staging server's S3 buckets
 AWS_PRELOAD_METADATA = True # You want this to be on!
 
-print "bar"
 
 
