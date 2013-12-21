@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'pallcvt&qv%)xfnfwn4&+q2i!7l_6w(^x*8vuh*nb!33e6l&g^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = False
 
@@ -149,8 +149,9 @@ STATICFILES_DIRS = (
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucket'
-AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucketdev'
+
+AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucket'
+# AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucketdev'
 
 DEFAULT_FILE_STORAGE = 'siteCoGM.s3utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'siteCoGM.s3utils.StaticRootS3BotoStorage'     
