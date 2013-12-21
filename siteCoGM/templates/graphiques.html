@@ -20,7 +20,8 @@
                 
                     <div id="graphique" class="textBoxContent">
                         {{ graph_name }} <br>
-                        <img id="nGM" src="{% static 'results/'|add:graph_name|add:'.png' %}" width="600"  />
+                        <!--<img id="nGM" src="{% static 'results/'|add:graph_name|add:'.png' %}" width="600"  />-->
+                        <img id="nGM" src="{{ MEDIA_URL }}{{graph_name}}.png" width="600"  />
                         <!--<img id="nGM" src="{% static 'results/nGM.png' %}"  />-->
                     </div>
                 {% endfor%}

@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'pallcvt&qv%)xfnfwn4&+q2i!7l_6w(^x*8vuh*nb!33e6l&g^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = False
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'analytical',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -46,6 +47,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-46616768-1'
@@ -110,9 +119,8 @@ USE_TZ = True
 #     # Don't forget to use absolute paths, not relative paths.
 # )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
-MEDIA_URL = '/media/'
+
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
@@ -124,18 +132,36 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# Static asset configuration
-import os
 
 
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+# STATIC_ROOT = 'static'
+
+MEDIA_ROOT = 'media' 
 STATIC_ROOT = 'static'
-STATIC_URL = '/static/'
+
 
 STATICFILES_DIRS = (
-    # os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'siteCoGM/static'),
 )
 
 
-foo = "bar"*5
-print foo
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucket'
+AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucketdev'
+
+DEFAULT_FILE_STORAGE = 'siteCoGM.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'siteCoGM.s3utils.StaticRootS3BotoStorage'     
+
+
+S3_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+MEDIA_URL = S3_URL + 'media/'
+STATIC_URL = S3_URL + 'static/'
+
+AWS_REDUCED_REDUNDANCY = False # We enable this server-wide on our staging server's S3 buckets
+AWS_PRELOAD_METADATA = True # You want this to be on!
+
+
+

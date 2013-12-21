@@ -6,6 +6,9 @@ import numpy as np
 from datetime import date, timedelta
 import os
 
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 
 
 
@@ -19,6 +22,20 @@ import os
 #######################################################################################
 #######################################################################################
 #######################################################################################
+
+def mySave(name, plt):
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    # plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.pdf'))
+    # plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.png'))
+    # plt.savefig(os.path.join(BASE_DIR, 'static/results', name+'.png'))
+
+    plt.savefig("./"+name+'.png')
+    file = open("./"+name+'.png')
+    default_storage.save("./"+name+'.png', ContentFile(file.read()))
+    file.close()
+
+    os.remove("./"+name+'.png')
+    
 
 
 
@@ -69,11 +86,7 @@ def do_nGM(pls,sp,ea,df,f):
     return dates, nGM
 
 
-def mySave(name, plt):
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    # plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.pdf'))
-    plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.png'))
-    plt.savefig(os.path.join(BASE_DIR, 'static/results', name+'.png'))
+
     
 
 def do_hist_sp(pls,sp,ea,df,f):

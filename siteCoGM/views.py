@@ -3,6 +3,8 @@ from django.shortcuts import render,render_to_response
 from django.template import RequestContext
 import os
 from django import forms
+from django.core.files.storage import default_storage
+
 from helper_compte_pf import clean_list, compute_stuff, print_compte, print_mail
 
 
@@ -28,30 +30,30 @@ def about(request):
     
         
 def compte_pf_detail(request):
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
-    fin = open(pfile,"r")
-    ls = fin.readlines() 
+    # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    # pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
+    # fin = open(pfile,"r")
+    # ls = fin.readlines()
+    file = default_storage.open('raw_compte_pf_detail.txt', 'r')
+    ls = file.readlines()
+    file.close()
     argDict = {'request':request, 'compte':ls,}
     return render_to_response('compte_pf_detail.html', argDict, context_instance=RequestContext(request))
     
     
 def compte_pf_total(request):
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_total.txt')
-    fin = open(pfile,"r")
-    ls = fin.readlines() 
+    file = default_storage.open('raw_compte_pf_total.txt', 'r')
+    ls = file.readlines()
+    file.close()
     argDict = {'request':request, 'compte':ls,}
     return render_to_response('compte_pf_total.html', argDict, context_instance=RequestContext(request))
     
     
 def page_mail(request):
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_mail.txt')
-    fin = open(pfile,"r")
-    ls = fin.readlines() 
+    file = default_storage.open('raw_mail.txt', 'r')
+    ls = file.readlines()
+    file.close()
     argDict = {'request':request, 'mail':ls,}
-
     return render_to_response('mail.html', argDict, context_instance=RequestContext(request))
     
     
@@ -114,25 +116,25 @@ Sophia, emilieleo , niv 4"""
     
     
 def update_compte_detail(info):
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
-    with open(pfile, 'r') as file:
+    with default_storage.open('raw_compte_pf_detail.txt', 'r') as file:
        data = file.readlines()
+       
+      
     newGM = info['dataGM'] + "\n"
     newGM+= info['pf'] + "\n"
     newGM+= "---------------------------------\n"
     data.insert(4,newGM)
-    with open(pfile, 'w') as file:
-       file.writelines(data)
+    
+    
+    with default_storage.open('raw_compte_pf_detail.txt', 'w') as file:
+       for l in data:
+            file.write(l)
        
        
 def update_compte_total_mail():
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
-    fin = open(pfile,"r")
-    ls = fin.readlines()   
+    with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
+        ls = file.readlines()   
     f = clean_list(ls)
-    fin.close()
 
 
     ### calcul des pf depenses, recus, etc... ####
@@ -143,15 +145,16 @@ def update_compte_total_mail():
     compte = print_compte(pls,sp,ea,df,f)
     mail = print_mail(pls,sp,ea,df,f)
     
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_total.txt')
-    with open(pfile, 'w') as file:
+
+    
+    with default_storage.open('raw_compte_pf_total.txt', 'w') as file:
         for l in compte:
             file.write(l+"\n")
-            
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_mail.txt')
-    with open(pfile, 'w') as file:
+
+    with default_storage.open('raw_mail.txt', 'w') as file:
         for l in mail:
             file.write(l+"\n")
+
 
 
 
@@ -166,19 +169,20 @@ class modifyDetailForm(forms.Form):
 
   
 def modify_compte_detail(request):
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
+    # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    # pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
+    # pfile2 = os.path.join(BASE_DIR, 'siteCoGM/static/raw_txt/raw_compte_pf_detail.txt')
     
     if request.method == 'POST':
         form = modifyDetailForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            with open(pfile, 'w') as file:
-                 file.write(cd['detail'])
+            with default_storage.open("raw_compte_pf_detail.txt", 'w') as file:
+                file.write(cd['detail'])
             update_compte_total_mail()
             return HttpResponseRedirect('/CoGM/')
     else:
-        with open(pfile, 'r') as file:
+        with default_storage.open("raw_compte_pf_detail.txt", 'r') as file:
             ls = file.readlines()
         initial_detail = ""
         for l in ls:
@@ -212,13 +216,9 @@ def mise_a_jour_graph(request):
     
     
 def do_mise_a_jour_graph():
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    pfile = os.path.join(BASE_DIR, 'siteCoGM/raw_compte_pf_detail.txt')
-    fin = open(pfile,"r")
-    ls = fin.readlines()   
+    with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
+        ls = file.readlines()  
     f = clean_list(ls)
-    fin.close()
-
 
     ### calcul des pf depenses, recus, etc... ####
     pls,sp,ea,df,f = compute_stuff(f)
@@ -231,6 +231,7 @@ def do_mise_a_jour_graph():
 
 def graphiques(request):
     graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
+    # graph_names = ['nGM',]
     argDict = {'request':request, 'graph_names': graph_names}
     return render_to_response('graphiques.html', argDict, context_instance=RequestContext(request))
     
