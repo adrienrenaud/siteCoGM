@@ -77,6 +77,9 @@ def ajout_GM(request):
             update_compte_total_mail()
             return HttpResponseRedirect('/CoGM/')
     else:
+        # file = default_storage.open('raw_default_gm.txt', 'r')
+        # ls = file.readlines()
+        # file.close()
         initial_pf = """adrienR : 0 pf
 ayor85 : 0 pf
 bravevolonte : 0 pf
@@ -104,6 +107,7 @@ tiousmi35 : 0 pf
 yamaod : 0 pf
 yoyo34540 : 0 pf
 zeux123 : 0 pf"""
+        # initial_pf = ls
         initial_dataGM = """debut 13/12/13
 Sophia, emilieleo , niv 4"""
         form = ajoutGMForm(
