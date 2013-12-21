@@ -30,8 +30,12 @@ def mySave(name, plt):
     # plt.savefig(os.path.join(BASE_DIR, 'static/results', name+'.png'))
 
     plt.savefig("./"+name+'.png')
-    raw = open("./"+name+'.png').read()
-    default_storage.save("./"+name+'.png', ContentFile(raw))
+    file = open("./"+name+'.png')
+    default_storage.save("./"+name+'.png', ContentFile(file.read()))
+    file.close()
+
+    os.remove("./"+name+'.png')
+    
 
 
 
