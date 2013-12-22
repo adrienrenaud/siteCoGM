@@ -167,8 +167,8 @@ STATICFILES_DIRS = (
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
-AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucket'
-# AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucketdev'
+# AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucket'
+AWS_STORAGE_BUCKET_NAME = 'adrienrenauds3bucketdev'
 
 DEFAULT_FILE_STORAGE = 'siteCoGM.s3utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'siteCoGM.s3utils.StaticRootS3BotoStorage'     
