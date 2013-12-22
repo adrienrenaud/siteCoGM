@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'analytical',
     'storages',
+    'south',
+    'siteCoGM.apps.userdata',
 )
 
 MIDDLEWARE_CLASSES = (

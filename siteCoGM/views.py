@@ -5,7 +5,9 @@ import os
 from django import forms
 from django.core.files.storage import default_storage
 from datetime import datetime
+from django.contrib.auth.models import User
 
+from siteCoGM.apps.userdata.models import Userdata
 from helper_compte_pf import clean_list, compute_stuff, print_compte, print_mail
 
 
@@ -284,4 +286,45 @@ def graphiques(request):
     # graph_names = ['nGM',]
     argDict = {'request':request, 'graph_names': graph_names}
     return render_to_response('graphiques.html', argDict, context_instance=RequestContext(request))
+    
+    
+    
+    
+################################################
+########### user registration
+################################################
+# from captcha.fields import CaptchaField
+
+class userForm(forms.Form):
+    # cf = CaptchaField()
+    # username = forms.CharField(widget=forms.Textarea(attrs={'cols': 30, 'rows': 1}))
+    username = forms.CharField(widget=forms.TextInput)
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+  
+
+
+
+def create_user(request):
+
+
+    if request.method == 'POST':
+        form = userForm(request.POST)
+        if form.is_valid():
+           username = request.POST.get('username')
+           password = request.POST.get('password')
+           user = User.objects.create_user(username=username, password=password)
+           user.save()
+           userdata = Userdata(name=user.username, user=user)
+           userdata.save()
+           return HttpResponseRedirect('/CoGM/created_user/')
+    else:
+        form = userForm()
+    argDict = {'request':request, 'form': form}
+    return render_to_response('create_user.html', argDict, context_instance=RequestContext(request))
+
+
+
+def created_user(request):        
+    return render_to_response('created_user.html', context_instance=RequestContext(request))
+    
     
