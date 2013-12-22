@@ -327,4 +327,3 @@ def create_user(request):
 def created_user(request):        
     return render_to_response('created_user.html', context_instance=RequestContext(request))
     
-    
