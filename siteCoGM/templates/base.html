@@ -34,6 +34,8 @@
 			<li class="selected"><a href="/CoGM">Home</a></li>
 			<li><a href="/CoGM/about">About</a></li>
 			<li><a href="/CoGM/create_user">Créer une CoGM</a></li>
+			<li><a href="/CoGM/login">Login</a></li>
+			<li><a href="/CoGM/logout">Logout</a></li>
 		</ul>
 	</nav>
 	
@@ -42,6 +44,7 @@
 			<h2>Développement collaboratif des Grands Monuments</h2>
 		</header>
 		<p>La CoGM organise un développement collaboratif des Grands Monuments (GM) de la guilde Brisgard Trade Union (BTU).</p>
+		<p> User : {{request.user.username}}</p>
 		<img src="{% static 'images/logo_forge_of_empires.jpg' %}"  alt="lime" />
 	</section>
 

@@ -7,13 +7,13 @@ from django.core.files.storage import default_storage
 from datetime import datetime
 from django.contrib.auth.models import User
 
-from siteCoGM.apps.userdata.models import Userdata
+from siteCoGM.apps.userdata.models import Userdata, Textfile
 from helper_compte_pf import clean_list, compute_stuff, print_compte, print_mail
 
+from django.core.files.base import ContentFile
 
 
-
-    
+from django.contrib.auth import authenticate, login, logout
 
     
         
@@ -38,7 +38,11 @@ def compte_pf_detail(request):
     # pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
     # fin = open(pfile,"r")
     # ls = fin.readlines()
-    file = default_storage.open('raw_compte_pf_detail.txt', 'r')
+    
+    # request.user.userdata
+    file = request.user.userdata.textfiles.all().get(filetype=0).file
+    
+    # file = default_storage.open('raw_compte_pf_detail.txt', 'r')
     ls = file.readlines()
     file.close()
     argDict = {'request':request, 'compte':ls,}
@@ -46,7 +50,9 @@ def compte_pf_detail(request):
     
     
 def compte_pf_total(request):
-    file = default_storage.open('raw_compte_pf_total.txt', 'r')
+    
+    file = request.user.userdata.textfiles.all().get(filetype=1).file
+    # file = default_storage.open('raw_compte_pf_total.txt', 'r')
     ls = file.readlines()
     file.close()
     argDict = {'request':request, 'compte':ls,}
@@ -54,7 +60,8 @@ def compte_pf_total(request):
     
     
 def page_mail(request):
-    file = default_storage.open('raw_mail.txt', 'r')
+    file = request.user.userdata.textfiles.all().get(filetype=2).file
+    # file = default_storage.open('raw_mail.txt', 'r')
     ls = file.readlines()
     file.close()
     argDict = {'request':request, 'mail':ls,}
@@ -92,11 +99,12 @@ def ajout_GM(request):
         form = ajoutGMForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            update_compte_detail(cd)
-            update_compte_total_mail()
+            update_compte_detail(request, cd)
+            update_compte_total_mail(request)
             return HttpResponseRedirect('/CoGM/')
     else:
-        file = default_storage.open('raw_default_gm.txt', 'r')
+        file = request.user.userdata.textfiles.all().get(filetype=3).file
+        # file = default_storage.open('raw_default_gm.txt', 'r')
         ls = file.readlines()
         file.close()
         initial_pf = ""
@@ -124,8 +132,10 @@ Sophia, emilieleo , niv 4"""%thedate
 ########### update comptes
 ################################################
     
-def update_compte_detail(info):
-    with default_storage.open('raw_compte_pf_detail.txt', 'r') as file:
+def update_compte_detail(request, info):
+    # with default_storage.open('raw_compte_pf_detail.txt', 'r') as file:
+    with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'r') as file:
+    # with default_storage.open('raw_compte_pf_detail.txt', 'r') as file:
        data = file.readlines()
     pf = info['pf']
     while pf.endswith("\n") or pf.endswith("\r"):
@@ -136,13 +146,15 @@ def update_compte_detail(info):
     newGM+= "---------------------------------\n"
     data.insert(4,newGM)
     
-    with default_storage.open('raw_compte_pf_detail.txt', 'w') as file:
+    with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'w') as file:
+    # with default_storage.open('raw_compte_pf_detail.txt', 'w') as file:
        for l in data:
             file.write(l)
        
        
-def update_compte_total_mail():
-    with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
+def update_compte_total_mail(request):
+    with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'r') as file:
+    # with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
         ls = file.readlines()   
     f = clean_list(ls)
 
@@ -152,11 +164,13 @@ def update_compte_total_mail():
     compte = print_compte(pls,sp,ea,df,f)
     mail = print_mail(pls,sp,ea,df,f)
     
-    with default_storage.open('raw_compte_pf_total.txt', 'w') as file:
+    with default_storage.open(request.user.userdata.textfiles.all().get(filetype=1).file.name, 'w') as file:
+    # with default_storage.open('raw_compte_pf_total.txt', 'w') as file:
         for l in compte:
             file.write(l+"\n")
 
-    with default_storage.open('raw_mail.txt', 'w') as file:
+    with default_storage.open(request.user.userdata.textfiles.all().get(filetype=2).file.name, 'w') as file:
+    # with default_storage.open('raw_mail.txt', 'w') as file:
         for l in mail:
             file.write(l+"\n")
 
@@ -187,13 +201,16 @@ def modify_compte_detail(request):
         form = modifyDetailForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            with default_storage.open("raw_compte_pf_detail.txt", 'w') as file:
+            # with default_storage.open("raw_compte_pf_detail.txt", 'w') as file:
+            with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'w') as file:
                 file.write(cd['detail'])
-            update_compte_total_mail()
+            update_compte_total_mail(request)
             return HttpResponseRedirect('/CoGM/')
     else:
-        with default_storage.open("raw_compte_pf_detail.txt", 'r') as file:
+        with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'r') as file:
+            print dir(file)
             ls = file.readlines()
+        
         initial_detail = ""
         for l in ls:
             initial_detail += l
@@ -220,11 +237,13 @@ def modify_ajout_gm(request):
         form = modifyDetailForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            with default_storage.open("raw_default_gm.txt", 'w') as file:
+            with default_storage.open(request.user.userdata.textfiles.all().get(filetype=3).file.name, 'w') as file:
+            # with default_storage.open("raw_default_gm.txt", 'w') as file:
                 file.write(cd['detail'])
             return HttpResponseRedirect('/CoGM/')
     else:
-        with default_storage.open("raw_default_gm.txt", 'r') as file:
+        with default_storage.open(request.user.userdata.textfiles.all().get(filetype=3).file.name, 'r') as file:
+        # with default_storage.open("raw_default_gm.txt", 'r') as file:
             ls = file.readlines()
         initial_detail = ""
         for l in ls:
@@ -270,7 +289,8 @@ def mise_a_jour_graph(request):
     
     
 def do_mise_a_jour_graph():
-    with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
+    # with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
+    with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'r') as file:
         ls = file.readlines()  
     f = clean_list(ls)
 
@@ -305,25 +325,81 @@ class userForm(forms.Form):
 
 
 def create_user(request):
-
-
     if request.method == 'POST':
         form = userForm(request.POST)
         if form.is_valid():
-           username = request.POST.get('username')
-           password = request.POST.get('password')
-           user = User.objects.create_user(username=username, password=password)
-           user.save()
-           userdata = Userdata(name=user.username, user=user)
-           userdata.save()
-           return HttpResponseRedirect('/CoGM/created_user/')
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            create_user_helper(username=username, password=password)
+            return HttpResponseRedirect('/CoGM/created_user/')
     else:
         form = userForm()
     argDict = {'request':request, 'form': form}
     return render_to_response('create_user.html', argDict, context_instance=RequestContext(request))
 
 
+def create_user_helper(username, password):
+    user = User.objects.create_user(username=username, password=password)
+    user.save()
+    userdata = Userdata(name=user.username, user=user)
+    userdata.save()
+    create_user_textfiles(userdata, 'raw_compte_pf_detail.txt', 0)
+    create_user_textfiles(userdata, 'raw_compte_pf_total.txt', 1)
+    create_user_textfiles(userdata, 'raw_mail.txt', 2)
+    create_user_textfiles(userdata, 'raw_default_gm.txt', 3)
+
+    
+def create_user_textfiles(userdata, filename, filetype):
+    t = Textfile(userdata=userdata, filetype=filetype)
+    f = default_storage.open('userdata/user_default/%s'%filename, 'r')
+    t.file.save(filename, ContentFile(f.read()))
+    f.close()
+    
+
+
+
+
 
 def created_user(request):        
     return render_to_response('created_user.html', context_instance=RequestContext(request))
     
+    
+    
+    
+    
+    
+    
+################################################
+########### user login/logout
+################################################
+
+class loginForm(forms.Form):
+    # cf = CaptchaField()
+    # username = forms.CharField(widget=forms.Textarea(attrs={'cols': 30, 'rows': 1}))
+    username = forms.CharField(widget=forms.TextInput)
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    
+    
+def login_page(request):
+    if request.POST:
+        form = loginForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            # return HttpResponseRedirect('/CoGM/created_user/')
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+            return HttpResponseRedirect('/CoGM/')
+    else:
+        form = loginForm()
+        
+    argDict = {'request':request, 'form': form}
+    return render_to_response('login.html', argDict, context_instance=RequestContext(request))
+
+
+
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

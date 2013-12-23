@@ -1,0 +1,51 @@
+
+
+
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+	<div id="innercontent">
+
+
+
+	    <article class="articlecontent">
+			<header>
+				<h2> Ajouter un GM :</h2>
+			</header>
+            <p>
+                {% if form.errors %}
+                    <p style="color: red;">
+                        Please correct the error{{ form.errors|pluralize }} below.
+                    </p>
+                {% endif %}
+            
+                <form action="" method="post">
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                    <input type="submit" value="Soumettre">
+                    {% csrf_token %}
+
+                </form> 
+            </p>
+		</article>
+
+    <p> Vous pouvez modifier le remplissage par défaut qui vous est proposé lorsque vous ajoutez un GM : <a href="/CoGM/modify_ajout_gm/">ici</a>. </p>
+
+
+    </div>
+{% endblock %}
+
+{% block aside %}
+
+    {% include 'aside.html' %}
+
+{% endblock %}
+
+
+
+
+
