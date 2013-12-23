@@ -2,6 +2,11 @@ from django.conf.urls import patterns, include, url
 from siteCoGM.views import homepage_view, about, compte_pf_detail, compte_pf_total, ajout_GM, page_mail, modify_compte_detail, mise_a_jour_graph, graphiques, modify_ajout_gm
 from siteCoGM.views import create_user, created_user, login_page, logout_page
 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 from django.contrib import admin
 admin.autodiscover()
 
@@ -25,3 +30,7 @@ urlpatterns = patterns('',
     url(r'^CoGM/modify_ajout_gm/$', modify_ajout_gm),
     url(r'^admin/', include(admin.site.urls)),
 )
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

@@ -280,7 +280,7 @@ def mise_a_jour_graph(request):
     if request.method == 'POST':
         form = miseAJourGraphForm(request.POST)
         if form.is_valid():
-            do_mise_a_jour_graph()
+            do_mise_a_jour_graph(request)
             return HttpResponseRedirect('/CoGM/')
     else:
         form = miseAJourGraphForm()
@@ -288,7 +288,7 @@ def mise_a_jour_graph(request):
     return render_to_response('mise_a_jour_graph.html', argDict, context_instance=RequestContext(request))
     
     
-def do_mise_a_jour_graph():
+def do_mise_a_jour_graph(request):
     # with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'r') as file:
         ls = file.readlines()  
@@ -297,16 +297,53 @@ def do_mise_a_jour_graph():
     ### calcul des pf depenses, recus, etc... ####
     pls,sp,ea,df,f = compute_stuff(f)
 
-    from helper_compte_pf_graph import do_graph
+    from helper_compte_pf_graph import do_graph, save_graph
     do_graph(pls,sp,ea,df,f)
+    graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
+    # graph_names = ['nGM']
+    
+    
+    
+    for f in request.user.userdata.textfiles.all().order_by('filetype')[4:]:
+    # for f in request.user.userdata.textfiles.all().order_by('filetype'):
+        f.delete()
+        print f.file.name, f.filetype
+    
+    
+    
+    # def save_graph(request, graph_names):
+    i=3
+    for gn in graph_names:
+        i+=1
+        t = Textfile(userdata=request.user.userdata, filetype=i)
+        file = open("./"+gn+'.png')
+        t.file.save(gn+'.png', ContentFile(file.read()))
+        # default_storage.save("./"gn+'.png', ContentFile(file.read()))
+        file.close()
+        os.remove("./"+gn+'.png')
+    
+
+    
+
+    
+def create_user_imagefiles(userdata, infilename, outfilename, filetype):
+    t = Textfile(userdata=userdata, filetype=filetype)
+    f = default_storage.open('userdata/user_default/paintpic.JPG', 'r')
+    t.file.save(outfilename, ContentFile(f.read()))
+    f.close()
+    
+    # save_graph(request, graph_names)
     
     
 def graphiques(request):
     graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
     # graph_names = ['nGM',]
-    argDict = {'request':request, 'graph_names': graph_names}
+    user_id = request.user.id
+    argDict = {'request':request, 'graph_names': graph_names, 'user_id': user_id}
     return render_to_response('graphiques.html', argDict, context_instance=RequestContext(request))
     
+    
+
     
     
     
@@ -355,7 +392,11 @@ def create_user_textfiles(userdata, filename, filetype):
     t.file.save(filename, ContentFile(f.read()))
     f.close()
     
-
+# def create_user_imagefiles(userdata, infilename, outfilename, filetype):
+#     t = Textfile(userdata=userdata, filetype=filetype)
+#     f = default_storage.open('userdata/user_default/paintpic.JPG', 'r')
+#     t.file.save(outfilename, ContentFile(f.read()))
+#     f.close()
 
 
 

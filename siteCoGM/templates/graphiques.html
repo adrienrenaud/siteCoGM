@@ -9,7 +9,7 @@
 
     {% load static %}
 	<div id="innercontent">
-    
+    <!--<img id="nGM" src="{{ MEDIA_URL }}nGM.png" width="600"  />-->
     
 		<article class="articlecontent">
 			<header>
@@ -20,15 +20,20 @@
                 
                     <div id="graphique" class="textBoxContent">
                         {{ graph_name }} <br>
+                            {% load static %}
                         <!--<img id="nGM" src="{% static 'results/'|add:graph_name|add:'.png' %}" width="600"  />-->
-                        <img id="nGM" src="{{ MEDIA_URL }}{{graph_name}}.png" width="600"  />
+                        <!--<img id="nGM" src="{% static 'images/paintpic.JPG' %}" width="600"  />-->
+                        <!--<img id="nGM" src="{% static 'results/'|add:graph_name|add:'.png' %}" width="600"  />-->
+                        <!--<img id="nGM" src="{{ MEDIA_URL }}paintpic.JPG" width="600"  />-->
+                        <!--<img id="nGM" src="{{MEDIA_URL}}nGM.png" width="600"  />-->
+                        <img id="nGM" src="{{ MEDIA_URL }}userdata/user_{{user_id}}/{{graph_name}}.png" width="600"  />
                         <!--<img id="nGM" src="{% static 'results/nGM.png' %}"  />-->
                     </div>
                 {% endfor%}
             </p>
 		</article>
     
-
+    
     </div>
 {% endblock %}
 

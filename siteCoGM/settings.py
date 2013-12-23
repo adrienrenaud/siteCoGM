@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'storages',
     'south',
     'siteCoGM.apps.userdata',
+    'django_cleanup', # should go after your apps
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,6 +93,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.media",
     )
 
 

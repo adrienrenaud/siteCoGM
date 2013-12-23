@@ -24,17 +24,17 @@ from django.core.files.base import ContentFile
 #######################################################################################
 
 def mySave(name, plt):
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     # plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.pdf'))
     # plt.savefig(os.path.join(BASE_DIR, 'siteCoGM/static/results', name+'.png'))
     # plt.savefig(os.path.join(BASE_DIR, 'static/results', name+'.png'))
 
     plt.savefig("./"+name+'.png')
-    file = open("./"+name+'.png')
-    default_storage.save("./"+name+'.png', ContentFile(file.read()))
-    file.close()
+    # file = open("./"+name+'.png')
+    # default_storage.save("./"+name+'.png', ContentFile(file.read()))
+    # file.close()
 
-    os.remove("./"+name+'.png')
+    # os.remove("./"+name+'.png')
     
 
 
@@ -59,6 +59,14 @@ def do_graph(pls,sp,ea,df,f):
     
 
     do_hist_sp(pls,sp,ea,df,f)
+
+
+def save_graph(request, graph_names):
+    for gn in graph_names:
+        file = open("./"+gn+'.png')
+        default_storage.save("./"+name+'.png', ContentFile(file.read()))
+        file.close()
+        os.remove("./"+name+'.png')
 
 
 def do_nGM(pls,sp,ea,df,f):
