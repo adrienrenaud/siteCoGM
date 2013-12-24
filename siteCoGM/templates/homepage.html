@@ -74,47 +74,48 @@
 				        </section>
 				    </li>				    
 				    
+			        {% if request.user.is_authenticated %}
 
-				    <!--eqblock-->
-				    <li>
-				        <section class="block">
-									<a href="/CoGM/ajout_GM"><img src="{% static 'images/basilius.png' %}" alt=""  /></a> 
-										<h2><a href="/CoGM/ajout_GM">Ajouter un GM</a></h2> 
-										<p>Lien pour ajouter un GM dans le détail du compte, le compte total et le mail seront alors mis à jour automatiquement.</p> 
-				        </section>
-				    </li>
-				    
-				    
-				    <!--eqblock-->
-				    <li>
-				        <section class="block">
-									<a href="/CoGM/mail/"><img src="{% static 'images/envelope-mail2.png' %}" alt=""  /></a> 
-										<h2><a href="/CoGM/mail/">Le mail à envoyer </a></h2> 
-										<p>Lien vers le mail à envoyer.  </p> 
-				        </section>
-				    </li>
-				    
-				    
-				    <!--eqblock-->
-				    <li>
-				        <section class="block" href="/CoGM/mise_a_jour_graph/">
-									<a href="/CoGM/mise_a_jour_graph/"><img src="{% static 'images/paintpic.JPG' %}" alt=""  /></a> 
-										<h2><a href="/CoGM/mise_a_jour_graph/">Mettre à jour les graphiques</a></h2> 
-										<p>Lien pour mettre à jour les graphiques. </p> 
-				        </section>
-				    </li>
-				    
+    				    <!--eqblock-->
+    				    <li>
+    				        <section class="block">
+    									<a href="/CoGM/ajout_GM"><img src="{% static 'images/basilius.png' %}" alt=""  /></a> 
+    										<h2><a href="/CoGM/ajout_GM">Ajouter un GM</a></h2> 
+    										<p>Lien pour ajouter un GM dans le détail du compte, le compte total et le mail seront alors mis à jour automatiquement.</p> 
+    				        </section>
+    				    </li>
+    				    
+    				    
+    				    <!--eqblock-->
+    				    <li>
+    				        <section class="block">
+    									<a href="/CoGM/mail/"><img src="{% static 'images/envelope-mail2.png' %}" alt=""  /></a> 
+    										<h2><a href="/CoGM/mail/">Le mail à envoyer </a></h2> 
+    										<p>Lien vers le mail à envoyer.  </p> 
+    				        </section>
+    				    </li>
+    				    
+    				    
+    				    <!--eqblock-->
+    				    <li>
+    				        <section class="block" href="/CoGM/mise_a_jour_graph/">
+    									<a href="/CoGM/mise_a_jour_graph/"><img src="{% static 'images/paintpic.JPG' %}" alt=""  /></a> 
+    										<h2><a href="/CoGM/mise_a_jour_graph/">Mettre à jour les graphiques</a></h2> 
+    										<p>Lien pour mettre à jour les graphiques. </p> 
+    				        </section>
+    				    </li>
+    				    
+    
+    				    <!--eqblock-->
+    				    <li>
+    				        <section class="block">
+    									<a href="/CoGM/modify_compte_detail/"><img src="{% static 'images/hand-Writing.jpg' %}" alt=""  /></a> 
+    										<h2><a href="/CoGM/modify_compte_detail/">Modifier le détail</a></h2> 
+    										<p>Lien pour modifier directement le détail du compte, le compte total et le mail seront alors mis à jour automatiquement. </p> 
+    				        </section>
+    				    </li>
 
-				    <!--eqblock-->
-				    <li>
-				        <section class="block">
-									<a href="/CoGM/modify_compte_detail/"><img src="{% static 'images/hand-Writing.jpg' %}" alt=""  /></a> 
-										<h2><a href="/CoGM/modify_compte_detail/">Modifier le détail</a></h2> 
-										<p>Lien pour modifier directement le détail du compte, le compte total et le mail seront alors mis à jour automatiquement. </p> 
-				        </section>
-				    </li>
-
-
+                    {% endif %}
 
 
 
