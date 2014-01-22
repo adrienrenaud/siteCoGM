@@ -31,6 +31,11 @@ def homepage_view(request):
 def about(request):
     argDict = {'request':request,}
     return render_to_response('about.html', argDict, context_instance=RequestContext(request))
+    
+def voir_cogm(request):
+    argDict = {'request':request,}
+    return render_to_response('voir_cogm.html', argDict, context_instance=RequestContext(request))
+    
 
 
 def compte_pf_detail(request):
