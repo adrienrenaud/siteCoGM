@@ -16,6 +16,7 @@ header, footer, section, aside, nav, article {
 body {
 	margin: 0 auto;
 	width: 960px;
+	/*width: 100%;*/
 	font: 14px/20px "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
 	background: #271408 url("images/bodybkg.gif") repeat;
 	}
@@ -133,11 +134,17 @@ nav ul li.subscribe a {
 
 /* intro */
 
+#conn p {
+    color: #fff !important;
+    
+    }
+
 #intro {
 	position: relative;
 	margin-top: 55px;
 	padding: 50px;
 	background: #695e53 url("images/introbkg.png") repeat-x;
+	/*width: 900px; */
 	/* background size */
 	-webkit-background-size: 100%;
 	-o-background-size: 100%;
