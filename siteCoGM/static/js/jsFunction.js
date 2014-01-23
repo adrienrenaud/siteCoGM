@@ -62,10 +62,6 @@ function setSessionUser(theUserId){
     window.location.href = theurl;
 }
 
-function boulangerie_favorite_added_id(theboulid){
-    var theurl = "/boulangerie_favorite_added_id/" + theboulid + "/";
-    window.location.href = theurl;
-}      
 
 
 
