@@ -24,14 +24,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 ################################################
 
 def homepage_view(request):
-    # if not 'currentCogm_id' in request.session.keys():
-    #     try:
-    #       user = User.objects.all()[0]
-    #       request.session['currentCogm_id'] = user.id
-    #       request.session['currentCogm_name'] = user.username
-    #     except:
-    #         pass
-    
     argDict = {'request':request,}
     return render_to_response('homepage.html', argDict, context_instance=RequestContext(request))
     
@@ -39,16 +31,6 @@ def homepage_view(request):
 def about(request):
     argDict = {'request':request,}
     return render_to_response('about.html', argDict, context_instance=RequestContext(request))
-    
-    
-def set_session_cogm_id(request, user_id):
-    try:
-       request.session['currentCogm_id'] = user_id
-       request.session['currentCogm_name'] = User.objects.get(id=user_id).username
-    except User.DoesNotExist:
-       return HttpResponse("Il n'y a pas de cogm pour cet id")
-    return HttpResponseRedirect('/CoGM/')
-    
     
     
 def voir_cogm(request):
@@ -64,6 +46,15 @@ def voir_cogm(request):
     argDict = {'request':request, 'luser':luser}
     return render_to_response('voir_cogm.html', argDict, context_instance=RequestContext(request))
     
+    
+def set_session_cogm_id(request, user_id):
+    logout(request)
+    try:
+       request.session['currentCogm_id'] = user_id
+       request.session['currentCogm_name'] = User.objects.get(id=user_id).username
+    except User.DoesNotExist:
+       return HttpResponse("Il n'y a pas de cogm pour cet id")
+    return HttpResponseRedirect('/CoGM/')
 
 
 def compte_pf_detail(request):
@@ -363,6 +354,8 @@ def do_mise_a_jour_graph(request):
         i+=1
         t = Textfile(userdata=request.user.userdata, filetype=i)
         file = open("./"+gn+'.png')
+        t.name = gn
+        t.legend = "foooooo barrrrrrrr"
         t.file.save(gn+'.png', ContentFile(file.read()))
         # default_storage.save("./"gn+'.png', ContentFile(file.read()))
         file.close()
@@ -379,13 +372,27 @@ def create_user_imagefiles(userdata, infilename, outfilename, filetype):
     f.close()
     
     # save_graph(request, graph_names)
+
+
+class Graph():
+    def __init__(self):
+        pass
     
     
+import helper_graph_legend
 def graphiques(request):
     graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
-    # graph_names = ['nGM',]
+    # graph_names = [('nGM','toto'),]
+    
+    nMembres = Graph(); nMembres.gname = 'nMembres'; nMembres.gleg = helper_graph_legend.nMembres
+    nSp_spInstant = Graph(); nSp_spInstant.gname = 'nSp_spInstant'; nSp_spInstant.gleg = helper_graph_legend.nSp_spInstant
+    graphs = [nMembres, nSp_spInstant]
     user_id = request.user.id
-    argDict = {'request':request, 'graph_names': graph_names, 'user_id': user_id}
+    
+    ggs = request.user.userdata.textfiles.all().filter(name__in=graph_names)
+
+        
+    argDict = {'request':request, 'graphs': graphs, 'user_id': user_id, 'ggs': ggs, }
     return render_to_response('graphiques.html', argDict, context_instance=RequestContext(request))
     
     
@@ -491,3 +498,6 @@ def logout_page(request):
     logout(request)
     # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponseRedirect('/CoGM/')
+    
+    
+    

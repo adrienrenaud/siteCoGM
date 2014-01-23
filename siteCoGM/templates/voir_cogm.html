@@ -8,33 +8,47 @@
 
 
 
-	<section id="content">
+	<section id="innercontent">
 
+
+        <article class="articlecontent">
+			<header>
+				<h2> Choisir une des CoGM :</h2>
+			</header>
+            <p>
+            
+           {% for theuser in luser %}
+
+                <div id="item_user" onclick="setSessionUser({{theuser.id}})" onmouseover="this.style.cursor='pointer';">
+                 <p> Cliquez pour voir la CoGM : <font color="#006600"> <b> {{ theuser.username }} </b> </font> </p>
+                </div>
+                
+            {% endfor %}
+            
+            <div class="textBoxContent">
+                <span class="step-links">
+                    {% if luser.has_previous %}
+                        <a href="{{ mypath }}page={{ luser.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ luser.number }} of {{ luser.paginator.num_pages }}.
+                    </span>
+            
+                    {% if luser.has_next %}
+                        <a href="{{ mypath }}page={{ luser.next_page_number }}" methode="GET" >next</a>
+                    {% endif %}
+                </span>
+            </div>
+                    
+
+            </p>
+		</article>
 
       
-   {% for theuser in luser %}
 
-    <div id="item_user" onclick="setSessionUser({{theuser.id}})" onmouseover="this.style.cursor='pointer';">
-     <p> CoGM : {{ theuser.username }} </p>
-    </div>
-    
-{% endfor %}
 
-    <div class="textBoxContent">
-        <span class="step-links">
-            {% if luser.has_previous %}
-                <a href="{{ mypath }}page={{ luser.previous_page_number }}">previous</a>
-            {% endif %}
-    
-            <span class="current">
-                Page {{ luser.number }} of {{ luser.paginator.num_pages }}.
-            </span>
-    
-            {% if luser.has_next %}
-                <a href="{{ mypath }}page={{ luser.next_page_number }}" methode="GET" >next</a>
-            {% endif %}
-        </span>
-    </div>
+
         
         				
 	</section>

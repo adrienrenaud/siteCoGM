@@ -17,6 +17,8 @@ def get_path(instance, filename):
 class Textfile(models.Model):
     userdata = models.ForeignKey(Userdata, related_name='textfiles')
     filetype = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    legend = models.TextField(max_length=1000, null=True, blank=True)
     # file = models.FileField(upload_to="userdata", null=True, blank=True)
     file = models.FileField(upload_to=get_path, null=True, blank=True)
 

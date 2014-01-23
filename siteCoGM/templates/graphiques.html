@@ -6,34 +6,40 @@
 
 
 {% block content %}
-
     {% load static %}
 	<div id="innercontent">
-    <!--<img id="nGM" src="{{ MEDIA_URL }}nGM.png" width="600"  />-->
-    
+		<!--<article class="articlecontent">-->
+		<!--	<header>-->
+		<!--		<h2> Les graphiques :</h2>-->
+		<!--	</header>-->
+  <!--          <p>-->
+  <!--              {% for graph in graphs %}-->
+  <!--                  <div id="graphique" class="textBoxContent">-->
+  <!--                      <img id="nGM" src="{{ MEDIA_URL }}userdata/user_{{user_id}}/{{graph.gname}}.png" width="600"  />-->
+  <!--                      <br> {{ graph.gleg }} -->
+  <!--                  </div>-->
+  <!--              {% endfor%}-->
+  <!--          </p>-->
+		<!--</article>-->
+		
+		
 		<article class="articlecontent">
 			<header>
 				<h2> Les graphiques :</h2>
 			</header>
             <p>
-                {% for graph_name in graph_names %}
-                
+                {% for graph in ggs %}
                     <div id="graphique" class="textBoxContent">
-                        {{ graph_name }} <br>
-                            {% load static %}
-                        <!--<img id="nGM" src="{% static 'results/'|add:graph_name|add:'.png' %}" width="600"  />-->
-                        <!--<img id="nGM" src="{% static 'images/paintpic.JPG' %}" width="600"  />-->
-                        <!--<img id="nGM" src="{% static 'results/'|add:graph_name|add:'.png' %}" width="600"  />-->
-                        <!--<img id="nGM" src="{{ MEDIA_URL }}paintpic.JPG" width="600"  />-->
-                        <!--<img id="nGM" src="{{MEDIA_URL}}nGM.png" width="600"  />-->
-                        <img id="nGM" src="{{ MEDIA_URL }}userdata/user_{{user_id}}/{{graph_name}}.png" width="600"  />
-                        <!--<img id="nGM" src="{% static 'results/nGM.png' %}"  />-->
+                        {{ graph.name }} 
+                        <img id="nGM" src="{{graph.file.url}}" width="600"  />
+                        <br> {{ graph.legend }} 
+                        <br>
                     </div>
                 {% endfor%}
             </p>
 		</article>
-    
-    
+		
+		
     </div>
 {% endblock %}
 
