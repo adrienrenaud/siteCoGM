@@ -14,7 +14,7 @@
       
    {% for theuser in luser %}
 
-    <div id="item_user" onclick="setSessionUser({{theuser.id}})">
+    <div id="item_user" onclick="setSessionUser({{theuser.id}})" onmouseover="this.style.cursor='pointer';">
      <p> CoGM : {{ theuser.username }} </p>
     </div>
     
