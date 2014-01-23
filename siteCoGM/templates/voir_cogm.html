@@ -11,10 +11,32 @@
 	<section id="content">
 
 
-        <p> foo bar</p>
+      
+   {% for theuser in luser %}
 
-	
-				
+    <div id="item_user" onclick="setSessionUser({{theuser.id}})">
+     <p> CoGM : {{ theuser.username }} </p>
+    </div>
+    
+{% endfor %}
+
+    <div class="textBoxContent">
+        <span class="step-links">
+            {% if luser.has_previous %}
+                <a href="{{ mypath }}page={{ luser.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ luser.number }} of {{ luser.paginator.num_pages }}.
+            </span>
+    
+            {% if luser.has_next %}
+                <a href="{{ mypath }}page={{ luser.next_page_number }}" methode="GET" >next</a>
+            {% endif %}
+        </span>
+    </div>
+        
+        				
 	</section>
 
 
@@ -23,6 +45,13 @@
 
 
 {% endblock %}
+
+
+
+
+
+
+
 
 
 

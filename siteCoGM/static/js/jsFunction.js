@@ -57,8 +57,8 @@ $("#logobis").attr("src","/static/baguette.jpg");
 //JavaScript style 
 /////////////////////////////////////////////////////////////
 
-function redirectToBoul(theboulid){
-    var theurl = "/boulangerie_" + theboulid + "/";
+function setSessionUser(theUserId){
+    var theurl = "/set_session_cogm_" + theUserId + "/";
     window.location.href = theurl;
 }
 

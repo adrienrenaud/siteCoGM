@@ -48,18 +48,12 @@
 		
 		
 		<section id="conn">
+		    <br>
 	    	{% if request.user.is_authenticated %}
-		        <p> Connecté en tant que : {{request.user.username}}</p>
-		    {% else %}
-		    
-
-		    
-		    
+		        <p> Connecté en tant qu'administrateur de la CoGM : {{request.user.username}}</p>
+		    {% elif request.session.currentCogm_id %}
+		        <p> Vous regardez la CoGM : {{request.session.currentCogm_name}}</p>
 		    {% endif%}
-		    
-		    
-		    
-		    
 	   	</section>
 		
 		

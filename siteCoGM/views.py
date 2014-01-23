@@ -15,7 +15,7 @@ from django.core.files.base import ContentFile
 
 from django.contrib.auth import authenticate, login, logout
 
-    
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
         
         
         
@@ -24,6 +24,14 @@ from django.contrib.auth import authenticate, login, logout
 ################################################
 
 def homepage_view(request):
+    # if not 'currentCogm_id' in request.session.keys():
+    #     try:
+    #       user = User.objects.all()[0]
+    #       request.session['currentCogm_id'] = user.id
+    #       request.session['currentCogm_name'] = user.username
+    #     except:
+    #         pass
+    
     argDict = {'request':request,}
     return render_to_response('homepage.html', argDict, context_instance=RequestContext(request))
     
@@ -32,8 +40,28 @@ def about(request):
     argDict = {'request':request,}
     return render_to_response('about.html', argDict, context_instance=RequestContext(request))
     
+    
+def set_session_cogm_id(request, user_id):
+    try:
+       request.session['currentCogm_id'] = user_id
+       request.session['currentCogm_name'] = User.objects.get(id=user_id).username
+    except User.DoesNotExist:
+       return HttpResponse("Il n'y a pas de cogm pour cet id")
+    return HttpResponseRedirect('/CoGM/')
+    
+    
+    
 def voir_cogm(request):
-    argDict = {'request':request,}
+    luser = User.objects.order_by("username")
+    paginator = Paginator(luser, 5) # Show 2 boul per page
+    page = request.GET.get('page')
+    try:
+        luser = paginator.page(page)
+    except PageNotAnInteger: # If page is not an integer, deliver first page.
+        luser = paginator.page(1)
+    except EmptyPage: # If page is out of range (e.g. 9999), deliver last page of results.
+        luser = paginator.page(paginator.num_pages)
+    argDict = {'request':request, 'luser':luser}
     return render_to_response('voir_cogm.html', argDict, context_instance=RequestContext(request))
     
 
@@ -43,10 +71,13 @@ def compte_pf_detail(request):
     # pfile = os.path.join(BASE_DIR, 'static/raw_txt/raw_compte_pf_detail.txt')
     # fin = open(pfile,"r")
     # ls = fin.readlines()
-    
-    # request.user.userdata
-    file = request.user.userdata.textfiles.all().get(filetype=0).file
-    
+
+    if not request.user.is_authenticated():
+        if not 'currentCogm_id' in request.session.keys():
+            return HttpResponseRedirect('/CoGM/voir_cogm/')
+        file = User.objects.get(id=request.session['currentCogm_id']).userdata.textfiles.all().get(filetype=0).file
+    else:
+        file = request.user.userdata.textfiles.all().get(filetype=0).file
     # file = default_storage.open('raw_compte_pf_detail.txt', 'r')
     ls = file.readlines()
     file.close()
@@ -56,7 +87,12 @@ def compte_pf_detail(request):
     
 def compte_pf_total(request):
     
-    file = request.user.userdata.textfiles.all().get(filetype=1).file
+    if not request.user.is_authenticated():
+        if not 'currentCogm_id' in request.session.keys():
+            return HttpResponseRedirect('/CoGM/voir_cogm/')
+        file = User.objects.get(id=request.session['currentCogm_id']).userdata.textfiles.all().get(filetype=1).file
+    else:
+        file = request.user.userdata.textfiles.all().get(filetype=1).file
     # file = default_storage.open('raw_compte_pf_total.txt', 'r')
     ls = file.readlines()
     file.close()
@@ -65,7 +101,12 @@ def compte_pf_total(request):
     
     
 def page_mail(request):
-    file = request.user.userdata.textfiles.all().get(filetype=2).file
+    if not request.user.is_authenticated():
+        if not 'currentCogm_id' in request.session.keys():
+            return HttpResponseRedirect('/CoGM/voir_cogm/')
+        file = User.objects.get(id=request.session['currentCogm_id']).userdata.textfiles.all().get(filetype=2).file
+    else:
+        file = request.user.userdata.textfiles.all().get(filetype=2).file
     # file = default_storage.open('raw_mail.txt', 'r')
     ls = file.readlines()
     file.close()
@@ -448,4 +489,5 @@ def login_page(request):
 
 def logout_page(request):
     logout(request)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect('/CoGM/')
