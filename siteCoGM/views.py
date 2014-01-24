@@ -339,7 +339,7 @@ def do_mise_a_jour_graph(request):
     from helper_compte_pf_graph import do_graph, save_graph
     do_graph(pls,sp,ea,df,f)
     graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
-    # graph_names = ['nGM']
+    # graph_names = ['nSp_spInstant']
     
     
     
@@ -349,6 +349,8 @@ def do_mise_a_jour_graph(request):
         print f.file.name, f.filetype
     
     
+    from helper_graph_legend import GraphsMetaDataStore
+    gtool = GraphsMetaDataStore()
     
     # def save_graph(request, graph_names):
     i=3
@@ -357,7 +359,7 @@ def do_mise_a_jour_graph(request):
         t = Textfile(userdata=request.user.userdata, filetype=i)
         file = open("./"+gn+'.png')
         t.name = gn
-        t.legend = "foooooo barrrrrrrr"
+        t.legend = gtool.leg[gn]
         t.file.save(gn+'.png', ContentFile(file.read()))
         # default_storage.save("./"gn+'.png', ContentFile(file.read()))
         file.close()
@@ -379,8 +381,11 @@ def create_user_imagefiles(userdata, infilename, outfilename, filetype):
 
     
     
-import helper_graph_legend
+from helper_graph_legend import GraphsMetaDataStore
 def graphiques(request):
+    
+    gtool = GraphsMetaDataStore()
+    
     graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
     # graph_names = ['nGM']
     graphs = request.user.userdata.textfiles.all().filter(name__in=graph_names)

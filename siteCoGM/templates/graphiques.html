@@ -22,21 +22,32 @@
   <!--          </p>-->
 		<!--</article>-->
 		
-		
+        
 		<article class="articlecontent">
 			<header>
 				<h2> Les graphiques :</h2>
 			</header>
-            <p>
+			<br>
+			<br>
+			<br>
+            <!--<p>-->
                 {% for graph in graphs %}
                     <div id="graphique" class="textBoxContent">
-                        {{ graph.name }} 
+                        <!--{{ graph.name }} -->
                         <img id="nGM" src="{{graph.file.url}}" width="600"  />
-                        <br> {{ graph.legend }} 
+                        <br>
+                        <h3>{{ graph.legend }}</h3>
+                        <!--<br>-->
+                        <hr style="width:600px; color:black; background-color:black; height:2px; border-width:0;" /> 
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                         <br>
                     </div>
+
                 {% endfor%}
-            </p>
+            <!--</p>-->
 		</article>
 		
 		
