@@ -8,24 +8,44 @@
 					<h3>Liens :</h3>
 				</header>
 				<ul>
-					<li>Lien vers le détail du compte :  <a class="linkColor" href="/CoGM/compte_pf_detail/"> ici</a></li>
-					<li>Lien vers le total du compte :  <a class="linkColor" href="/CoGM/compte_pf_total/">ici</a></li>
-					<li>Lien vers les graphiques <a class="linkColor" href="/CoGM/graphiques/"> ici </a></li>
+					<li> <a class="linkColor" href="/CoGM/compte_pf_detail/">Lien vers le détail du compte</a> </li>
+					<li> <a class="linkColor" href="/CoGM/compte_pf_total/">Lien vers le total du compte</a> </li>
+					<li> <a class="linkColor" href="/CoGM/graphiques/">Lien vers les graphiques</a> </li>
 				</ul>
 			</section>
 			
-			
+	    	{% if request.user.is_authenticated %}
+    			<section>
+    				<header>
+    					<h3> CoGM : {{request.user.userdata.name}}</h3>
+    				</header>
+					<ul>
+    					<li> Nbr de membres : <font style="color:green">{{request.user.userdata.nMembres}} </font></li>
+    					<li> Pf dépensés : <font style="color:green">{{request.user.userdata.nSp}}</font></li>
+    					<li> Nbr de GM augmentés : <font style="color:green">{{request.user.userdata.nGM}}</font></li>
+    					<li> Membre à augmenté : <font style="color:green">{{request.user.userdata.nextBoy}}</font></li>
+    				</ul>
+    			</section>
+            {% endif%}
+    		
+    		
+    			<section>
+    				<header>
+    					<h3> CoGM : {{request.session.userdata_name}}</h3>
+    				</header>
+					<ul>
+    					<li> Nbr de membres : <font style="color:green">{{request.session.userdata_nMembres}} </font></li>
+    					<li> Pf dépensés : <font style="color:green">{{request.session.userdata_nSp}}</font></li>
+    					<li> Nbr de GM augmentés : <font style="color:green">{{request.session.userdata_nGM}}</font></li>
+    					<li> Membre à augmenté : <font style="color:green">{{request.session.userdata_nextBoy}}</font></li>
+    				</ul>
+    			</section>
+
+		    <!--{% if request.session.userdata %}-->
+		    <!--{% endif%}-->
 		
 			
-			<!--<section>-->
-			<!--	<header>-->
-			<!--		<h3>Sponsors</h3>-->
-			<!--	</header>-->
-			<!--		<img src="images/ad125.jpg" alt="ad" /> <img src="images/ad125.jpg" alt="ad" />-->
-			<!--		<br />-->
-			<!--		<img src="images/ad125.jpg" alt="ad" /> <img src="images/ad125.jpg" alt="ad" />-->
-			<!--		<br /><br />-->
-			<!--</section>-->
+
 			
 			<!--<section>-->
 			<!--	<header>-->

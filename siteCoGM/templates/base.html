@@ -54,8 +54,8 @@
 		    <br>
 	    	{% if request.user.is_authenticated %}
 		        <p> Vous managez la CoGM : {{request.user.username}}</p>
-		    {% elif request.session.currentCogm_id %}
-		        <p> Vous regardez la CoGM : {{request.session.currentCogm_name}}</p>
+		    {% elif request.session.user_id %}
+		        <p> Vous regardez la CoGM : {{request.session.user_name}}</p>
 		    {% endif%}
 	   	</section>
 		

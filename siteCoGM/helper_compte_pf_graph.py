@@ -56,8 +56,6 @@ def do_graph(pls,sp,ea,df,f):
 
     # do_sp_instant(pls,sp,ea,df,f)
     do_nSp_spInstant(pls,sp,ea,df,f)
-    
-
     # do_hist_sp(pls,sp,ea,df,f)
 
 

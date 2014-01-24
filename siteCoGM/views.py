@@ -8,7 +8,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 from siteCoGM.apps.userdata.models import Userdata, Textfile
-from helper_compte_pf import clean_list, compute_stuff, print_compte, print_mail
+from helper_compte_pf import clean_list, compute_stuff, compute_info, print_compte, print_mail
 
 from django.core.files.base import ContentFile
 
@@ -26,6 +26,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 ################################################
 
 def homepage_view(request):
+    
+    # try:
+    #     print "fooooooo",request.user.userdata.nMembres, request.user.userdata.nGM, request.user.userdata.nSp,request.user.userdata.nextBoy
+    # except:
+    #     pass
     argDict = {'request':request,}
     return render_to_response('homepage.html', argDict, context_instance=RequestContext(request))
     
@@ -49,11 +54,21 @@ def voir_cogm(request):
     return render_to_response('voir_cogm.html', argDict, context_instance=RequestContext(request))
     
     
+from django.core import serializers
+
+
 def set_session_cogm_id(request, user_id):
     logout(request)
     try:
-       request.session['currentCogm_id'] = user_id
-       request.session['currentCogm_name'] = User.objects.get(id=user_id).username
+        userdata = User.objects.get(id=user_id).userdata
+        request.session['userdata_name'] = userdata.name
+        request.session['userdata_nGM'] = userdata.nGM
+        request.session['userdata_nMembres'] = userdata.nMembres
+        request.session['userdata_nSp'] = userdata.nSp
+        request.session['userdata_nextBoy'] = userdata.nextBoy
+        request.session['user_id'] = user_id
+        request.session['user_name'] = User.objects.get(id=user_id).username
+        request.session.save()        
     except User.DoesNotExist:
        return HttpResponse("Il n'y a pas de cogm pour cet id")
     return HttpResponseRedirect('/CoGM/')
@@ -66,24 +81,25 @@ def compte_pf_detail(request):
     # ls = fin.readlines()
 
     if not request.user.is_authenticated():
-        if not 'currentCogm_id' in request.session.keys():
+        if not 'user_id' in request.session.keys():
             return HttpResponseRedirect('/CoGM/voir_cogm/')
-        file = User.objects.get(id=request.session['currentCogm_id']).userdata.textfiles.all().get(filetype=0).file
+        file = User.objects.get(id=request.session['user_id']).userdata.textfiles.all().get(filetype=0).file
     else:
         file = request.user.userdata.textfiles.all().get(filetype=0).file
+        userdata = request.user.userdata
     # file = default_storage.open('raw_compte_pf_detail.txt', 'r')
     ls = file.readlines()
     file.close()
-    argDict = {'request':request, 'compte':ls,}
+    argDict = {'request':request, 'compte':ls}
     return render_to_response('compte_pf_detail.html', argDict, context_instance=RequestContext(request))
     
     
 def compte_pf_total(request):
     
     if not request.user.is_authenticated():
-        if not 'currentCogm_id' in request.session.keys():
+        if not 'user_id' in request.session.keys():
             return HttpResponseRedirect('/CoGM/voir_cogm/')
-        file = User.objects.get(id=request.session['currentCogm_id']).userdata.textfiles.all().get(filetype=1).file
+        file = User.objects.get(id=request.session['user_id']).userdata.textfiles.all().get(filetype=1).file
     else:
         file = request.user.userdata.textfiles.all().get(filetype=1).file
     # file = default_storage.open('raw_compte_pf_total.txt', 'r')
@@ -95,9 +111,9 @@ def compte_pf_total(request):
     
 def page_mail(request):
     if not request.user.is_authenticated():
-        if not 'currentCogm_id' in request.session.keys():
+        if not 'user_id' in request.session.keys():
             return HttpResponseRedirect('/CoGM/voir_cogm/')
-        file = User.objects.get(id=request.session['currentCogm_id']).userdata.textfiles.all().get(filetype=2).file
+        file = User.objects.get(id=request.session['user_id']).userdata.textfiles.all().get(filetype=2).file
     else:
         file = request.user.userdata.textfiles.all().get(filetype=2).file
     # file = default_storage.open('raw_mail.txt', 'r')
@@ -196,12 +212,20 @@ def update_compte_total_mail(request):
     # with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
         ls = file.readlines()   
     f = clean_list(ls)
+    
 
     ### calcul des pf depenses, recus, etc... ####
     pls,sp,ea,df,f = compute_stuff(f)
     ### afficher le resultat selon les arguments : soit compte, soit mail, soit graphiques ###
     compte = print_compte(pls,sp,ea,df,f)
     mail = print_mail(pls,sp,ea,df,f)
+    
+    nMembres, nGM, nSp, nextBoy = compute_info(pls,sp,ea,df,f)
+    request.user.userdata.nMembres = nMembres
+    request.user.userdata.nGM = nGM 
+    request.user.userdata.nSp = nSp
+    request.user.userdata.nextBoy = nextBoy 
+    request.user.userdata.save()
     
     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=1).file.name, 'w') as file:
     # with default_storage.open('raw_compte_pf_total.txt', 'w') as file:

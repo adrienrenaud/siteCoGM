@@ -147,7 +147,13 @@ def find_df(sp,ea):
    return df
 
 
-
+def compute_info(pls,sp,ea,df,f):
+    nMembres = len(pls)
+    nGM = len(f)
+    nSp = 0
+    for asp in sp: nSp+=asp[1]
+    nextBoy = df[[l[1] for l in df].index( max([l[1] for l in df]))][0]
+    return nMembres, nGM, nSp, nextBoy
 
 
 ########################################################################
