@@ -28,7 +28,7 @@
 				<h2> Les graphiques :</h2>
 			</header>
             <p>
-                {% for graph in ggs %}
+                {% for graph in graphs %}
                     <div id="graphique" class="textBoxContent">
                         {{ graph.name }} 
                         <img id="nGM" src="{{graph.file.url}}" width="600"  />

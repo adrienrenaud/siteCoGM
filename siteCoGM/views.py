@@ -376,25 +376,15 @@ def create_user_imagefiles(userdata, infilename, outfilename, filetype):
     # save_graph(request, graph_names)
 
 
-class Graph():
-    def __init__(self):
-        pass
+
     
     
 import helper_graph_legend
 def graphiques(request):
     graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
-    # graph_names = [('nGM','toto'),]
-    
-    nMembres = Graph(); nMembres.gname = 'nMembres'; nMembres.gleg = helper_graph_legend.nMembres
-    nSp_spInstant = Graph(); nSp_spInstant.gname = 'nSp_spInstant'; nSp_spInstant.gleg = helper_graph_legend.nSp_spInstant
-    graphs = [nMembres, nSp_spInstant]
-    user_id = request.user.id
-    
-    ggs = request.user.userdata.textfiles.all().filter(name__in=graph_names)
-
-        
-    argDict = {'request':request, 'graphs': graphs, 'user_id': user_id, 'ggs': ggs, }
+    # graph_names = ['nGM']
+    graphs = request.user.userdata.textfiles.all().filter(name__in=graph_names)
+    argDict = {'request':request, 'graphs': graphs, }
     return render_to_response('graphiques.html', argDict, context_instance=RequestContext(request))
     
     
