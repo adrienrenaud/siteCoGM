@@ -152,7 +152,7 @@ def ajout_GM(request):
             
         thedate = datetime.now().strftime("%d/%m/%y")
         initial_dataGM = """debut %s 
-Sophia, emilieleo , niv 4"""%thedate
+Sophia, kate , niv 4"""%thedate
         form = ajoutGMForm(
             initial={'pf': initial_pf, 'dataGM': initial_dataGM}
         )
@@ -414,6 +414,7 @@ class userForm(forms.Form):
 def create_user(request):
     if request.method == 'POST':
         form = userForm(request.POST)
+        logout(request)
         if form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password')

@@ -58,6 +58,16 @@ def print_compte(pls,sp,ea,df,f):
    ls.append('-'*40)
    ls.append("TOTAL :")
 
+
+   tot = 0
+   ls.append('-'*40)
+   ls.append('::: depense - recu :')
+   for (name, npf) in df:
+      ls.append("%s : %i pf"%(name, npf)) 
+      tot+=npf
+   ls.append("- - - - - - - - - ")
+   ls.append("somme : %i"%tot)
+   
    tot = 0
    ls.append('-'*40)
    ls.append('::: depense :')
@@ -76,14 +86,6 @@ def print_compte(pls,sp,ea,df,f):
    ls.append("- - - - - - - - - ")
    ls.append("somme : %i"%tot)
 
-   tot = 0
-   ls.append('-'*40)
-   ls.append('::: depense - recu :')
-   for (name, npf) in df:
-      ls.append("%s : %i pf"%(name, npf)) 
-      tot+=npf
-   ls.append("- - - - - - - - - ")
-   ls.append("somme : %i"%tot)
 
    ls.append('-'*40)
    ls.append('-'*40)

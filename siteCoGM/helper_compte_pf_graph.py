@@ -54,11 +54,11 @@ def do_graph(pls,sp,ea,df,f):
     do_niv(f)
     do_player(f)
 
-    do_sp_instant(pls,sp,ea,df,f)
+    # do_sp_instant(pls,sp,ea,df,f)
     do_nSp_spInstant(pls,sp,ea,df,f)
     
 
-    do_hist_sp(pls,sp,ea,df,f)
+    # do_hist_sp(pls,sp,ea,df,f)
 
 
 def save_graph(request, graph_names):
@@ -89,7 +89,7 @@ def do_nGM(pls,sp,ea,df,f):
     # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     # plt.savefig(os.path.join(BASE_DIR, 'mysite/static/results', 'nGM.pdf'))
     # plt.savefig(os.path.join(BASE_DIR, 'mysite/static/results', 'nGM.png'))
-    mySave('nGM', plt)
+    # mySave('nGM', plt)
 
     return dates, nGM
 
@@ -520,7 +520,7 @@ def do_nSp(pls,sp,ea,df,f):
     # plt.savefig("results/nSp.pdf")
     # plt.savefig("results/nSp.png")
 
-    mySave('nSp', plt)
+    # mySave('nSp', plt)
 
     return dates, nSp
 
