@@ -26,9 +26,9 @@
     					<li> Membre à augmenté : <font style="color:green">{{request.user.userdata.nextBoy}}</font></li>
     				</ul>
     			</section>
-            {% endif%}
-    		
-    		
+    			
+    	    {% elif request.session.userdata_name %}
+    	    
     			<section>
     				<header>
     					<h3> CoGM : {{request.session.userdata_name}}</h3>
@@ -41,8 +41,7 @@
     				</ul>
     			</section>
 
-		    <!--{% if request.session.userdata %}-->
-		    <!--{% endif%}-->
+		    {% endif%}
 		
 			
 
