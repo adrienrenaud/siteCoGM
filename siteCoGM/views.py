@@ -412,13 +412,30 @@ def create_user_imagefiles(userdata, infilename, outfilename, filetype):
     
     
 from helper_graph_legend import GraphsMetaDataStore
+
+
 def graphiques(request):
     
-    gtool = GraphsMetaDataStore()
+    if request.user.is_authenticated():
+        userdata = request.user.userdata
+    elif 'user_id' in request.session.keys():
+        userdata = User.objects.get(id=request.session['user_id']).userdata
+    else:
+        return HttpResponseRedirect('/CoGM/voir_cogm/')
+        
+        
+    # if not request.user.is_authenticated():
+    #     if not 'user_id' in request.session.keys():
+    #         return HttpResponseRedirect('/CoGM/voir_cogm/')
+    #     userdata = User.objects.get(id=request.session['user_id']).userdata
+    # else:
+    #     userdata = request.user.userdata
+        
+
     
     graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
     # graph_names = ['nGM']
-    graphs = request.user.userdata.textfiles.all().filter(name__in=graph_names)
+    graphs = userdata.textfiles.all().filter(name__in=graph_names)
     argDict = {'request':request, 'graphs': graphs, }
     return render_to_response('graphiques.html', argDict, context_instance=RequestContext(request))
     
