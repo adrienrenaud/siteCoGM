@@ -1,23 +1,30 @@
+import os
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,render_to_response
 from django.template import RequestContext
-import os
-from django import forms
 from django.core.files.storage import default_storage
-from datetime import datetime
-from django.contrib.auth.models import User
-
-from siteCoGM.apps.userdata.models import Userdata, Textfile
-from helper_compte_pf import clean_list, compute_stuff, compute_info, print_compte, print_mail
-
-from django.core.files.base import ContentFile
-
+from django import forms
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test
 
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User, Group
+from django.core.files.base import ContentFile
+from siteCoGM.apps.userdata.models import Userdata, Textfile
+
+
+from datetime import datetime
+from helper_compte_pf import clean_list, compute_stuff, compute_info, print_compte, print_mail
+
+
+
         
-from django.contrib.auth.decorators import login_required
+        
+        
+        
+        
         
         
 ################################################
@@ -41,7 +48,7 @@ def about(request):
     
 def voir_cogm(request):
     
-    luser = User.objects.order_by("username")
+    luser = User.objects.filter(groups__name="simple_user").order_by("username")
     paginator = Paginator(luser, 10) # Show 2 boul per page
     page = request.GET.get('page')
     try:
@@ -139,18 +146,19 @@ def page_mail(request):
 ################################################
     
 class ajoutGMForm(forms.Form):
-    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
     dataGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 2}))     
     pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))
-    def clean_password(self):
-        password = self.cleaned_data['password']
-        if password !=  os.environ.get('MY_COGM_PASSWORD'):
-            raise forms.ValidationError("Mauvais password !")
-        return password
+    # def clean_password(self):
+    #     password = self.cleaned_data['password']
+    #     if password !=  os.environ.get('MY_COGM_PASSWORD'):
+    #         raise forms.ValidationError("Mauvais password !")
+    #     return password
   
   
   
 # @login_required(login_url='/CoGM/login/')
+@user_passes_test(lambda u: u.groups.filter(name='simple_user').exists(), login_url='/CoGM/')
 @login_required
 def ajout_GM(request):
     if request.method == 'POST':
@@ -253,15 +261,16 @@ def update_compte_total_mail(request):
 ################################################
 
 class modifyDetailForm(forms.Form):
-    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
     detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))  
-    def clean_password(self):
-        password = self.cleaned_data['password']
-        if password != os.environ.get('MY_COGM_PASSWORD'):
-            raise forms.ValidationError("Mauvais password !")
-        return password
+    # def clean_password(self):
+    #     password = self.cleaned_data['password']
+    #     if password != os.environ.get('MY_COGM_PASSWORD'):
+    #         raise forms.ValidationError("Mauvais password !")
+    #     return password
 
-  
+
+@user_passes_test(lambda u: u.groups.filter(name='simple_user').exists(), login_url='/CoGM/')
 @login_required
 def modify_compte_detail(request):
     if request.method == 'POST':
@@ -299,6 +308,7 @@ def modify_compte_detail(request):
 ########### modidier ajout GM
 ################################################
 
+@user_passes_test(lambda u: u.groups.filter(name='simple_user').exists(), login_url='/CoGM/')
 @login_required
 def modify_ajout_gm(request):
     if request.method == 'POST':
@@ -336,14 +346,16 @@ def modify_ajout_gm(request):
 ################################################
 
 class miseAJourGraphForm(forms.Form):
-    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    def clean_password(self):
-        password = self.cleaned_data['password']
-        if password != os.environ.get('MY_COGM_PASSWORD'):
-            raise forms.ValidationError("Mauvais password !")
-        return password
+    pass
+    # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    # def clean_password(self):
+    #     password = self.cleaned_data['password']
+    #     if password != os.environ.get('MY_COGM_PASSWORD'):
+    #         raise forms.ValidationError("Mauvais password !")
+    #     return password
 
 
+@user_passes_test(lambda u: u.groups.filter(name='simple_user').exists(), login_url='/CoGM/')
 @login_required
 def mise_a_jour_graph(request):
     if request.method == 'POST':
@@ -475,6 +487,12 @@ def create_user(request):
 
 def create_user_helper(username, password):
     user = User.objects.create_user(username=username, password=password)
+    if not Group.objects.filter(name="simple_user").exists():
+        group = Group(name="simple_user")
+        group.save() 
+    group = Group.objects.get(name='simple_user') 
+    group.user_set.add(user)
+    
     user.save()
     userdata = Userdata(name=user.username, user=user)
     userdata.save()
