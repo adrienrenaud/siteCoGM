@@ -46,8 +46,6 @@ def homepage_view(request):
 def about(request):
     argDict = {'request':request,}
     return render_to_response('about.html', argDict, context_instance=RequestContext(request))
-    
-    
 def tutoriel(request):
     argDict = {'request':request,}
     return render_to_response('tutoriel.html', argDict, context_instance=RequestContext(request))
@@ -191,6 +189,7 @@ def ajout_GM(request):
             cd = form.cleaned_data
             update_compte_detail(request, cd)
             update_compte_total_mail(request)
+            send_backup_mail(request)
             return HttpResponseRedirect('/CoGM/')
     else:
         file = request.user.userdata.textfiles.all().get(filetype=3).file
@@ -282,7 +281,10 @@ def update_compte_total_mail(request):
         for l in mail:
             file.write(l+"\n")
             
-            
+def send_backup_mail(request):
+    from django.core.mail import send_mail
+    send_mail('Subject here', 'Here is the message.', 'from@example.com', ['cogm.foe@gmail.com'], fail_silently=False)
+
             
             
             
