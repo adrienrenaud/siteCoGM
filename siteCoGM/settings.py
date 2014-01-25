@@ -186,3 +186,5 @@ AWS_REDUCED_REDUNDANCY = False # We enable this server-wide on our staging serve
 AWS_PRELOAD_METADATA = True # You want this to be on!
 
 
+## redirection url for the login_requiered decorator 
+LOGIN_URL = '/CoGM/login/'

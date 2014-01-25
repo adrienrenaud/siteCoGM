@@ -34,12 +34,12 @@
 	</header>
 	<nav>
 		<ul>
-			<li class="selected"><a href="/CoGM">Home</a></li>
-			<li><a href="/CoGM/about">About</a></li>
-			<li><a href="/CoGM/voir_cogm">Voir une CoGM</a></li>
-			<li><a href="/CoGM/create_user">Créer une CoGM</a></li>
-			<li><a href="/CoGM/login">Login</a></li>
-			<li><a href="/CoGM/logout">Logout</a></li>
+			<li class="selected"><a href="/CoGM">Accueil</a></li>
+			<li><a href="/CoGM/about">Guide/FAQ</a></li>
+			<li><a href="/CoGM/voir_cogm">Voir CoGM</a></li>
+			<li><a href="/CoGM/create_user">Créer CoGM</a></li>
+			<li><a href="/CoGM/login">Connexion</a></li>
+			<li><a href="/CoGM/logout">Déconnexion</a></li>
 		</ul>
 	</nav>
 	
@@ -47,20 +47,28 @@
 		<header>
 			<h2>Développement collaboratif des Grands Monuments</h2>
 		</header>
-		<p>La CoGM organise un développement collaboratif des Grands Monuments (GM) de la guilde Brisgard Trade Union (BTU).</p>
+		<!--<p>La CoGM organise un développement collaboratif des Grands Monuments (GM) de la guilde Brisgard Trade Union (BTU).</p>-->
+		<!--<p>La CoGM organise un développement collaboratif des Grands Monuments. -->
+		<p>
+		    Ce site permet de tenir un compte des points de forge dépensés et reçus par les membres de la collaboration afin de rendre l'échange équitable.
+		</p>
 		
-		
-		<section id="conn">
-		    <br>
-	    	{% if request.user.is_authenticated %}
-		        <p> Vous managez la CoGM : {{request.user.username}}</p>
-		    {% elif request.session.user_id %}
-		        <p> Vous regardez la CoGM : {{request.session.user_name}}</p>
-		    {% endif%}
-	   	</section>
+    	{% if request.user.is_authenticated %}		
+		    <section id="conn">
+    		    <br>
+    	        <p> Vous managez la CoGM : {{request.user.username}}</p>
+    	   	</section>
+	    {% elif request.session.user_id %}
+		    <section id="conn">
+    		    <br>
+    	        <p> Vous regardez la CoGM : {{request.session.user_name}}</p>
+    	   	</section>
+	    {% endif%}
 		
 		
 		<img src="{% static 'images/logo_forge_of_empires.jpg' %}"  alt="lime"  />
+		<!--<img src="{% static 'images/nSp_spInstant.png' %}"  alt="lime"  />-->
+		<!--<img src="{% static 'images/logo_siteCoGM.jpg' %}"  alt="lime"  />-->
 	</section>
 
 

@@ -17,8 +17,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
         
-        
-        
+from django.contrib.auth.decorators import login_required
         
         
 ################################################
@@ -41,8 +40,9 @@ def about(request):
     
     
 def voir_cogm(request):
+    
     luser = User.objects.order_by("username")
-    paginator = Paginator(luser, 5) # Show 2 boul per page
+    paginator = Paginator(luser, 10) # Show 2 boul per page
     page = request.GET.get('page')
     try:
         luser = paginator.page(page)
@@ -149,6 +149,9 @@ class ajoutGMForm(forms.Form):
         return password
   
   
+  
+# @login_required(login_url='/CoGM/login/')
+@login_required
 def ajout_GM(request):
     if request.method == 'POST':
         form = ajoutGMForm(request.POST)
@@ -259,6 +262,7 @@ class modifyDetailForm(forms.Form):
         return password
 
   
+@login_required
 def modify_compte_detail(request):
     if request.method == 'POST':
         form = modifyDetailForm(request.POST)
@@ -294,7 +298,8 @@ def modify_compte_detail(request):
 ################################################
 ########### modidier ajout GM
 ################################################
-  
+
+@login_required
 def modify_ajout_gm(request):
     if request.method == 'POST':
         form = modifyDetailForm(request.POST)
@@ -339,6 +344,7 @@ class miseAJourGraphForm(forms.Form):
         return password
 
 
+@login_required
 def mise_a_jour_graph(request):
     if request.method == 'POST':
         form = miseAJourGraphForm(request.POST)

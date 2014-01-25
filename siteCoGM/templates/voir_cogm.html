@@ -23,13 +23,14 @@
                 <div id="item_user" onclick="setSessionUser({{theuser.id}})" onmouseover="this.style.cursor='pointer';">
                  <p> Cliquez pour voir la CoGM : <font color="#006600"> <b> {{ theuser.username }} </b> </font> </p>
                 </div>
+                <br>
                 
             {% endfor %}
             
             <div class="textBoxContent">
                 <span class="step-links">
                     {% if luser.has_previous %}
-                        <a href="{{ mypath }}page={{ luser.previous_page_number }}">previous</a>
+                        <a href="{{ mypath }}?page={{ luser.previous_page_number }}" methode="GET">previous</a>
                     {% endif %}
             
                     <span class="current">
@@ -37,7 +38,7 @@
                     </span>
             
                     {% if luser.has_next %}
-                        <a href="{{ mypath }}page={{ luser.next_page_number }}" methode="GET" >next</a>
+                        <a href="{{ mypath }}?page={{ luser.next_page_number }}" methode="GET" >next</a>
                     {% endif %}
                 </span>
             </div>
