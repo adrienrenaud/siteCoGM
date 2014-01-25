@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -147,8 +149,8 @@ def page_mail(request):
     
 class ajoutGMForm(forms.Form):
     # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    dataGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 2}))     
-    pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))
+    dataGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 2}), label='Info GM')     
+    pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 40}), label='pf dépensés')
     # def clean_password(self):
     #     password = self.cleaned_data['password']
     #     if password !=  os.environ.get('MY_COGM_PASSWORD'):
@@ -262,7 +264,7 @@ def update_compte_total_mail(request):
 
 class modifyDetailForm(forms.Form):
     # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}))  
+    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}), label='Détail')  
     # def clean_password(self):
     #     password = self.cleaned_data['password']
     #     if password != os.environ.get('MY_COGM_PASSWORD'):
@@ -464,8 +466,8 @@ def graphiques(request):
 class userForm(forms.Form):
     # cf = CaptchaField()
     # username = forms.CharField(widget=forms.Textarea(attrs={'cols': 30, 'rows': 1}))
-    username = forms.CharField(widget=forms.TextInput)
-    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput, label='Nom de la CoGM')
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput, label='Mot de passe')
   
 
 
@@ -533,8 +535,8 @@ def created_user(request):
 class loginForm(forms.Form):
     # cf = CaptchaField()
     # username = forms.CharField(widget=forms.Textarea(attrs={'cols': 30, 'rows': 1}))
-    username = forms.CharField(widget=forms.TextInput)
-    password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput, label='Nom de la CoGM')
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput, label='Mot de passe')
     
     
 def login_page(request):
