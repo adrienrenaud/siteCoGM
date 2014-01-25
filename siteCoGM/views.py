@@ -164,9 +164,9 @@ def page_mail(request):
     
 class ajoutGMForm(forms.Form):
     # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    user = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='propriétaire GM')   
     nomGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='nom GM')     
     nivGM = forms.IntegerField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='niveau GM')     
-    user = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='propriétaire GM')     
     date = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='date')     
     pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 40}), label='pf dépensés')
     # def clean_password(self):
