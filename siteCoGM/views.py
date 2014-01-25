@@ -48,6 +48,10 @@ def about(request):
     return render_to_response('about.html', argDict, context_instance=RequestContext(request))
     
     
+def tutoriel(request):
+    argDict = {'request':request,}
+    return render_to_response('tutoriel.html', argDict, context_instance=RequestContext(request))
+    
 def voir_cogm(request):
     
     luser = User.objects.filter(groups__name="simple_user").order_by("username")
