@@ -1,2 +1,2 @@
-leo : 0 pf
-kate : 0 pf
+leo : 0
+kate : 0

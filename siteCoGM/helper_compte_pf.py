@@ -18,9 +18,10 @@ def print_mail(pls,sp,ea,df,f):
 
    ls=[]
    ls.append("@CoGM")
-   ls.append("On a fini le GM (%s) de %s en %i jours, donc je compte %i pf maximum."%(gm[0][1][0], gm[0][0], ndays, ndays*3))
+#   ls.append("On a fini le GM (%s) de %s en %i jours, donc je compte %i pf maximum."%(gm[0][1][0], gm[0][0], ndays, ndays*3))
+   ls.append("On a fini le GM (%s) de %s."%(gm[0][1][0], gm[0][0]))
    # print "Demain on va chez %s. Tu veux quel GM %s ?"%(nextBoy, nextBoy)
-   ls.append("Demain on va chez %s sur ."%(nextBoy))
+   ls.append("Demain on va chez %s."%(nextBoy))
 
    ls.append("")
    ls.append("Voila les pf pris en compte sur le dernier GM :")
@@ -65,8 +66,8 @@ def print_compte(pls,sp,ea,df,f):
    for (name, npf) in df:
       ls.append("%s : %i pf"%(name, npf)) 
       tot+=npf
-   ls.append("- - - - - - - - - ")
-   ls.append("somme : %i"%tot)
+#   ls.append("- - - - - - - - - ")
+#   ls.append("somme : %i"%tot)
    
    tot = 0
    ls.append('-'*40)
@@ -74,8 +75,8 @@ def print_compte(pls,sp,ea,df,f):
    for (name, npf) in sp:
       ls.append("%s : %i pf"%(name, npf)) 
       tot+=npf
-   ls.append("- - - - - - - - - ")
-   ls.append("somme : %i"%tot)
+#   ls.append("- - - - - - - - - ")
+#   ls.append("somme : %i"%tot)
 
    tot = 0
    ls.append('-'*40)
@@ -83,8 +84,8 @@ def print_compte(pls,sp,ea,df,f):
    for (name, npf) in ea:
       ls.append("%s : %i pf"%(name, npf)) 
       tot+=npf
-   ls.append("- - - - - - - - - ")
-   ls.append("somme : %i"%tot)
+#   ls.append("- - - - - - - - - ")
+#   ls.append("somme : %i"%tot)
 
 
    ls.append('-'*40)

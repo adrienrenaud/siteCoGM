@@ -143,13 +143,31 @@ def page_mail(request):
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 ################################################
 ########### ajout GM
 ################################################
     
 class ajoutGMForm(forms.Form):
     # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    dataGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 2}), label='Info GM')     
+    nomGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='nom GM')     
+    nivGM = forms.IntegerField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='niveau GM')     
+    user = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='propriétaire GM')     
+    date = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='date')     
     pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 40}), label='pf dépensés')
     # def clean_password(self):
     #     password = self.cleaned_data['password']
@@ -179,16 +197,23 @@ def ajout_GM(request):
         for l in ls:
             initial_pf += l
             
-        thedate = datetime.now().strftime("%d/%m/%y")
-        initial_dataGM = """debut %s 
-Sophia, kate , niv 4"""%thedate
+        initial_date = "%s"%datetime.now().strftime("%d/%m/%y")
+        # initial_dataGM = """debut %s 
+# Sophia, kate , niv 4"""%thedate
+        initial_nomGM = "Statue de Zeus"
+        initial_nivGM = 3
+        initial_user  = "kate"
+
+
+
         form = ajoutGMForm(
-            initial={'pf': initial_pf, 'dataGM': initial_dataGM}
+            initial={'pf': initial_pf, 'nomGM': initial_nomGM, 'nivGM': initial_nivGM, 'user': initial_user, 'date' : initial_date}
         )
     
     argDict = {'request':request, 'form': form}
     return render_to_response('ajout_GM.html', argDict, context_instance=RequestContext(request))
     
+
 
 
 
@@ -208,8 +233,11 @@ def update_compte_detail(request, info):
     pf = info['pf']
     while pf.endswith("\n") or pf.endswith("\r"):
         pf = pf[:-len("\n")]
-      
-    newGM = info['dataGM'] + "\n"
+    
+    
+    newGM=  "debut %s"%info['date'] + "\n"
+    newGM+= "%s , %s , niv %i"%(info['nomGM'], info['user'], info['nivGM']) + "\n"
+    # newGM = info['dataGM'] + "\n"
     newGM+= pf + "\n"
     newGM+= "---------------------------------\n"
     data.insert(4,newGM)
@@ -249,6 +277,142 @@ def update_compte_total_mail(request):
     # with default_storage.open('raw_mail.txt', 'w') as file:
         for l in mail:
             file.write(l+"\n")
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+    
+    
+    
+    
+# ################################################
+# ########### ajout GM
+# ################################################
+    
+# class ajoutGMForm(forms.Form):
+#     # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+#     dataGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 2}), label='Info GM')     
+#     pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 40}), label='pf dépensés')
+#     # def clean_password(self):
+#     #     password = self.cleaned_data['password']
+#     #     if password !=  os.environ.get('MY_COGM_PASSWORD'):
+#     #         raise forms.ValidationError("Mauvais password !")
+#     #     return password
+  
+  
+  
+# # @login_required(login_url='/CoGM/login/')
+# @user_passes_test(lambda u: u.groups.filter(name='simple_user').exists(), login_url='/CoGM/')
+# @login_required
+# def ajout_GM(request):
+#     if request.method == 'POST':
+#         form = ajoutGMForm(request.POST)
+#         if form.is_valid():
+#             cd = form.cleaned_data
+#             update_compte_detail(request, cd)
+#             update_compte_total_mail(request)
+#             return HttpResponseRedirect('/CoGM/')
+#     else:
+#         file = request.user.userdata.textfiles.all().get(filetype=3).file
+#         # file = default_storage.open('raw_default_gm.txt', 'r')
+#         ls = file.readlines()
+#         file.close()
+#         initial_pf = ""
+#         for l in ls:
+#             initial_pf += l
+            
+#         thedate = datetime.now().strftime("%d/%m/%y")
+#         initial_dataGM = """debut %s 
+# Sophia, kate , niv 4"""%thedate
+#         form = ajoutGMForm(
+#             initial={'pf': initial_pf, 'dataGM': initial_dataGM}
+#         )
+    
+#     argDict = {'request':request, 'form': form}
+#     return render_to_response('ajout_GM.html', argDict, context_instance=RequestContext(request))
+    
+
+
+
+
+
+
+
+# ################################################
+# ########### update comptes
+# ################################################
+    
+# def update_compte_detail(request, info):
+#     # with default_storage.open('raw_compte_pf_detail.txt', 'r') as file:
+#     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'r') as file:
+#     # with default_storage.open('raw_compte_pf_detail.txt', 'r') as file:
+#       data = file.readlines()
+#     pf = info['pf']
+#     while pf.endswith("\n") or pf.endswith("\r"):
+#         pf = pf[:-len("\n")]
+      
+#     newGM = info['dataGM'] + "\n"
+#     newGM+= pf + "\n"
+#     newGM+= "---------------------------------\n"
+#     data.insert(4,newGM)
+    
+#     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'w') as file:
+#     # with default_storage.open('raw_compte_pf_detail.txt', 'w') as file:
+#       for l in data:
+#             file.write(l)
+       
+       
+# def update_compte_total_mail(request):
+#     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'r') as file:
+#     # with default_storage.open("raw_compte_pf_detail.txt", "r") as file:
+#         ls = file.readlines()   
+#     f = clean_list(ls)
+    
+
+#     ### calcul des pf depenses, recus, etc... ####
+#     pls,sp,ea,df,f = compute_stuff(f)
+#     ### afficher le resultat selon les arguments : soit compte, soit mail, soit graphiques ###
+#     compte = print_compte(pls,sp,ea,df,f)
+#     mail = print_mail(pls,sp,ea,df,f)
+    
+#     nMembres, nGM, nSp, nextBoy = compute_info(pls,sp,ea,df,f)
+#     request.user.userdata.nMembres = nMembres
+#     request.user.userdata.nGM = nGM 
+#     request.user.userdata.nSp = nSp
+#     request.user.userdata.nextBoy = nextBoy 
+#     request.user.userdata.save()
+    
+#     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=1).file.name, 'w') as file:
+#     # with default_storage.open('raw_compte_pf_total.txt', 'w') as file:
+#         for l in compte:
+#             file.write(l+"\n")
+
+#     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=2).file.name, 'w') as file:
+#     # with default_storage.open('raw_mail.txt', 'w') as file:
+#         for l in mail:
+#             file.write(l+"\n")
 
 
 
