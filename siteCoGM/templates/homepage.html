@@ -74,14 +74,23 @@
 				    </li>
 
 				    <!--eqblock-->
-				    <li>
-				        <section class="block" style="background:#f2ede7">
-				        </section>
-				    </li>				    
+				    <!--<li>-->
+				    <!--    <section class="block" style="background:#f2ede7">-->
+				    <!--    </section>-->
+				    <!--</li>				    -->
 				    
 			        {% if request.user.is_authenticated %}
 
     				    <!--eqblock-->
+    				    <li>
+    				        <section class="block">
+    									<a href="/CoGM/fiche_cogm/"><img src="{% static 'images/user_account.png' %}" alt=""  /></a> 
+    										<h2><a href="/CoGM/ajout_GM">Votre CoGM</a></h2> 
+    										<p>Modifiez les informations générales sur votre CoGM.</p> 
+    				        </section>
+    				    </li>
+    				    
+    				    
     				    <li>
     				        <section class="block">
     									<a href="/CoGM/ajout_GM"><img src="{% static 'images/basilius.png' %}" alt=""  /></a> 

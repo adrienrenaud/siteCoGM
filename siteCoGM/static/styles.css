@@ -375,5 +375,25 @@ input[type="submit"] {
     
     width:150px;
     height:30px;
-    margin-left:200px;
+    margin-left:260px;
+}
+
+
+label {
+
+    float: left;
+
+}
+
+textarea {
+
+    float: left;
+
+}
+
+.errorlist{
+    /*float:right;*/
+    color:red;
+    /*clear: both;*/
+    /*display: block;*/
 }

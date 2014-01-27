@@ -1,0 +1,76 @@
+
+
+
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+	<div id="innercontent">
+
+
+
+	    <article class="articlecontent">
+			<header>
+				<h2> Votre CoGM : {{request.user.userdata.name}}</h2>
+			</header>
+            <p>
+                Vous pouvez modifier le nom de votre CoGM :
+                {% if form.errors %}
+                    <p style="color: red;">
+                        Corrigez le{{ form.errors|pluralize }} erreur{{ form.errors|pluralize }} si-dessous.
+                    </p>
+                {% endif %}
+            
+                <form action="" method="post">
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                    <br>
+                    <input type="submit" name="change_data" value="Soumettre">
+                    {% csrf_token %}
+
+                </form> 
+            </p>
+            
+            <br>
+            <br>
+            <br>
+            
+            <p>
+                Vous pouvez modifier votre mot de passe :
+                {% if form_password.errors %}
+                    <p style="color: red;">
+                        Corrigez le{{ form_password.errors|pluralize }} erreur{{ form_password.errors|pluralize }} ci-dessous.
+                    </p>
+                {% endif %}
+            
+                <form action="" method="post">
+                    <table>
+                        {{ form_password.as_table }}
+                    </table>
+                    <br>
+                    <input type="submit" name="change_password" value="Soumettre">
+                    {% csrf_token %}
+
+                </form> 
+            </p>
+            
+		</article>
+
+
+
+    </div>
+{% endblock %}
+
+{% block aside %}
+
+    {% include 'aside.html' %}
+
+{% endblock %}
+
+
+
+
+

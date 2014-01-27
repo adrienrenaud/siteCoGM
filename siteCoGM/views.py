@@ -2,7 +2,7 @@
 
 import os
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render,render_to_response
 from django.template import RequestContext
 from django.core.files.storage import default_storage
@@ -16,6 +16,7 @@ from django.contrib.auth.models import User, Group
 from django.core.files.base import ContentFile
 from siteCoGM.apps.userdata.models import Userdata, Textfile
 
+from django.template import TemplateDoesNotExist
 
 from datetime import datetime
 from helper_compte_pf import clean_list, compute_stuff, compute_info, print_compte, print_mail
@@ -35,18 +36,31 @@ from helper_compte_pf import clean_list, compute_stuff, compute_info, print_comp
 
 def default_view(request, templateName):
     argDict = {'request':request,}
-    return render_to_response(templateName+'.html', argDict, context_instance=RequestContext(request))
-
+    templateNames = [
+                    'erreur_compte',
+                    'about',
+                    'tutoriel',
+                    'changes_done',
+                    ]
+    # print templates_name
+    if templateName in templateNames:
+        try:
+            return render_to_response(templateName+'.html', argDict, context_instance=RequestContext(request))
+        except TemplateDoesNotExist:
+            raise Http404
+    else:
+        raise Http404
 
 def homepage_view(request):
     argDict = {'request':request,}
     return render_to_response('homepage.html', argDict, context_instance=RequestContext(request))
-def about(request):
-    argDict = {'request':request,}
-    return render_to_response('about.html', argDict, context_instance=RequestContext(request))
-def tutoriel(request):
-    argDict = {'request':request,}
-    return render_to_response('tutoriel.html', argDict, context_instance=RequestContext(request))
+    
+# def about(request):
+#     argDict = {'request':request,}
+#     return render_to_response('about.html', argDict, context_instance=RequestContext(request))
+# def tutoriel(request):
+#     argDict = {'request':request,}
+#     return render_to_response('tutoriel.html', argDict, context_instance=RequestContext(request))
     
 
 def compte_pf_detail(request):
@@ -142,12 +156,74 @@ def set_session_cogm_id(request, user_id):
     
     
     
+################################################
+########### fiche CoGM
+################################################
     
     
+class ficheCoGMForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput, label='Nom de la CoGM')
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username).exists() or Userdata.objects.filter(name=username).exists():
+            raise forms.ValidationError("Ce nom est déjà utilisé !")
+        return username
+        
+class ficheCoGMForm_password(forms.Form):
+    passwordold = forms.CharField(max_length=32, widget=forms.PasswordInput, label='Ancien mot de passe')
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput, label='Nouveau mot de passe')
+    passwordagain = forms.CharField(max_length=32, widget=forms.PasswordInput, label='Confirmer nouveau mot de passe')
+    def __init__(self, user, *args, **kwargs):
+        super(ficheCoGMForm_password, self).__init__(*args, **kwargs)
+        self.user = user
+    def clean_passwordold(self):
+        passwordold = self.cleaned_data['passwordold']
+        if not self.user.check_password(passwordold):
+            raise forms.ValidationError("Erreur dans le mot de passe")
+        return passwordold
+    def clean_passwordagain(self):
+        password = self.cleaned_data['password']
+        passwordagain = self.cleaned_data['passwordagain']
+        if password != passwordagain:
+            raise forms.ValidationError("Erreur dans la confirmation du mot de passe")
+        return passwordagain
     
+@user_passes_test(lambda u: u.groups.filter(name='simple_user').exists(), login_url='/CoGM/')
+@login_required
+def fiche_user(request):
+    if request.POST and 'change_data' in request.POST:
+        form = ficheCoGMForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            request.user.username = cd['username']
+            request.user.userdata.name = cd['username']
+            request.user.save()
+            request.user.userdata.save()
+            return HttpResponseRedirect('/CoGM/view/changes_done/')
+    else:
+        initial_username = request.user.userdata.name
+        form = ficheCoGMForm(initial={'username': initial_username})
+        
+        
+        
+    if request.POST and 'change_password' in request.POST:
+        form_password = ficheCoGMForm_password(request.user, request.POST)
+        if form_password.is_valid():
+            cd = form_password.cleaned_data
+            request.user.set_password(cd['password'])
+            request.user.save()
+            return HttpResponseRedirect('/CoGM/view/changes_done/')
+    else:
+        form_password = ficheCoGMForm_password(user=request.user)
+        
+        
+        
+    argDict = {'request':request, 'form': form, 'form_password': form_password}
+    return render_to_response('fiche_cogm.html', argDict, context_instance=RequestContext(request))
     
-    
-    
+################################################
+################################################
+################################################
     
     
     
@@ -158,11 +234,12 @@ def set_session_cogm_id(request, user_id):
     
 class ajoutGMForm(forms.Form):
     # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    user = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='propriétaire GM')   
-    nomGM = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='nom GM')     
-    nivGM = forms.IntegerField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='niveau GM')     
-    date = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 1}), label='date')     
-    pf = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 40}), label='pf dépensés')
+    cols = 58
+    user = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='propriétaire GM')   
+    nomGM = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='nom GM')     
+    nivGM = forms.IntegerField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='niveau GM')     
+    date = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='date')     
+    pf = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 40}), label='pf dépensés')
     # def clean_password(self):
     #     password = self.cleaned_data['password']
     #     if password !=  os.environ.get('MY_COGM_PASSWORD'):
@@ -309,7 +386,7 @@ def send_backup_mail(request):
 ################################################
 
 class modifyDetailForm(forms.Form):
-    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 30}), label='Détail')  
+    detail = forms.CharField(widget=forms.Textarea(attrs={'cols': 58, 'rows': 30}), label='Détail')  
 
 
 @user_passes_test(lambda u: u.groups.filter(name='simple_user').exists(), login_url='/CoGM/')
@@ -473,8 +550,19 @@ def graphiques(request):
 class userForm(forms.Form):
     # cf = CaptchaField()
     username = forms.CharField(widget=forms.TextInput, label='Nom de la CoGM')
-    password = forms.CharField(max_length=32, widget=forms.PasswordInput, label='Mot de passe')
-  
+    password = forms.CharField(widget=forms.PasswordInput, max_length=32, label='Mot de passe')
+    passwordagain = forms.CharField(widget=forms.PasswordInput, max_length=32, label='Confirmer mot de passe')
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username).exists() or Userdata.objects.filter(name=username).exists():
+            raise forms.ValidationError("Ce nom est déjà utilisé !")
+        return username
+    def clean_passwordagain(self):
+        password = self.cleaned_data['password']
+        passwordagain = self.cleaned_data['passwordagain']
+        if password != passwordagain:
+            raise forms.ValidationError("Erreur dans la confirmation du mot de passe")
+        return passwordagain
 
 
 

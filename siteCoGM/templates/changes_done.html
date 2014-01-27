@@ -1,0 +1,36 @@
+
+
+
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+	<div id="innercontent">
+
+
+
+	    <article class="articlecontent">
+			<header>
+				<h2> Votre CoGM : {{request.user.userdata.name}}</h2>
+			</header>
+            <p>
+            Les changements ont été effectués.
+		</article>
+
+
+
+    </div>
+{% endblock %}
+
+{% block aside %}
+
+    {% include 'aside.html' %}
+
+{% endblock %}
+
+
+
+
+
