@@ -11,22 +11,6 @@
             <p>
 
 
-                <!--<p>-->
-                <!--La CoGM organise un développement collaboratif des Grands Monuments (GM) de la guilde Brisgard Trade Union (BTU).-->
-                <!--</p>-->
-                
-                <!--<h3>Règles de la CoGM :</h3>-->
-                <!--Tous les membres dépensent 3 points de forge (pf) par jour sur un même GM jusqu'à ce qu'il passe au niveau suivant. On change alors de GM et tout les membres continuent à dépenser 3 pf par jour sur le nouveau GM. <br>-->
-                <!--Un compte des pf dépensés et reçus par chaque membre est tenu dans le sujet ‘CoGM – compte Points de Forge’ sur le forum de la BTU. <br>-->
-                <!--Ce compte permet de définir un solde pour chaque joueur : la différence entre les pf dépensé et les pf reçus. A chaque changement de GM, le nouveau GM est choisi chez le membre ayant le plus grand solde.<br>-->
-                
-                
-                <!--<h3>Gestion et utilisation du compte des pf :</h3>-->
-                <!--Le solde des joueurs est calculé grâce aux informations représentées dans la partie ‘Details’ du compte des pf.<br>-->
-                <!--Ces données sont analysées par un programme informatique (écrit en langage Python) qui calcule le solde des joueurs et écrit la partie ‘Total’ du compte des pf. <br>-->
-                <!--Ce programme écrit aussi le mail envoyé à chaque augmentation de GM et il produit les graphiques de ce document.<br>-->
-
-
 
 Regardez nos deux <a class="linkColor" href="/CoGM/tutoriel/"> tutoriaux vidéos </a> pour savoir comment créer et manager une CoGM.
 
@@ -35,6 +19,7 @@ Regardez nos deux <a class="linkColor" href="/CoGM/tutoriel/"> tutoriaux vidéos
 <h3>Qu'est-ce qu'une CoGM ?</h3>
 Une CoGM est une structure visant à organiser un développement collaboratif des Grands Monuments (GM) des membres de la CoGM. <br>
 Les membres dépensent des points de forge (pf) sur les GM des autres membres et la CoGM organise cet 'échange' de pf.
+
 
 <br>
 <br>
@@ -83,12 +68,13 @@ Vous pouvez saisir des pf dépensés et reçus... voir le compte total... voir l
 <h3>Comment saisir des pf dépensés et reçus ?</h3>
 Pour saisir des pf reçus et dépensés cliquez sur "Ajouter un GM".
 Remplissez alors le formulaire.<br>
-Dans la case 'Datagm' du formulaire vous devez indiquer à quel membre les pf ont été donnés.
-Dans la case 'pf' du formulaire vous indiquerez quels sont les membres ayant donné des pf et combien de pf ont-ils donné.
-Faites très attention à respecter le format attendu pour une saisie. Ce format vous est indiqué par défaut.<br>
-Sur la première ligne de la case "Datagm", vous devez inscrire une date (par exemple celle de la saisie).
-Sur la seconde ligne, vous devez indiquer le nom du GM (par exemple Sophia), le nom du membre à qui appartient ce GM et le niveau du GM. Le nom du membre est très important, car il détermine qui reçoit les pf dans l'échange. Les autres informations permettent de créer des graphiques retraçant l'historique de la CoGM.<br>
-Dans la case 'pf' vous indiquez le nom des membres ayant donné des pf, suivi du nombre de pf donné.<br>
+Dans la case 'propriétaire du GM' vous devez indiquer le nom du membre à qui les pf ont été donnés.<br>
+Dans la case 'nom du GM' vous indiquez le type de GM, par exemple Zeus, Statue de zeus, Sophia, Phare, etc...<br>
+Vous indiquez le niveau du GM dans la case 'niveau du GM' et une date (par exemple celle de la saisie) dans la case 'date'.<br>
+Dans la case 'pf' du formulaire vous indiquerez quels sont les membres ayant donné des pf et combien de pf ils ont donné.
+Faites très attention à respecter le format attendu pour une saisie. Ce format vous est indiqué par défaut.
+Vous devez indiquer le nom des membres ayant donné des pf, suivi du nombre de pf donné, les deux étant déparés par ':'.<br>
+Par exemple : 'kate : 3', pour dire que kate a dépensé 3 pf.
 Le compte total est alors mis à jour.
 
 
@@ -112,6 +98,33 @@ A partir de la page d'accueil, cliquez sur 'Mettre à jour les graphiques'.
 Vous pouvez ensuite voir les graphiques en cliquant sur 'Les graphiques'.
 
 
+<br>
+<br>
+<h3>Quel format pour le 'compte détail' ?</h3>
+Voici à quoi doit ressembler le compte détail (2 saisies effectuées) : <br>
+                --------------------------------- <br>
+                --------------------------------- <br>
+                Details : <br>
+                --------------------------------- <br>
+                debut 28/01/14 <br>
+                Statue de Zeus , leo , niv 3<br> 
+                leo : 0 <br>
+                kate : 10 <br>
+                --------------------------------- <br>
+                debut 27/01/14 <br>
+                Statue de Zeus , kate , niv 3 <br>
+                leo : 10 <br>
+                kate : 0 <br>
+                --------------------------------- <br>
+                --------------------------------- <br>
+
+
+<br>
+<br>
+<h3>Sauvegarde de vos anciennes saisies ?</h3>
+Si vous voulez revenir à une version antérieure de vos saisies envoyez un mail à gogm.foe@gmail.com précisant le nom de votre CoGM et la date (jour+heure) à laquelle vous voulez revenir. 
+Nous vous enverrons un fichier comptenant le détail de votre compte. Vous devrez alors copier-coller le contenu de ce fichier dans le formulaire accessible depuis la page 'Modifier le détail'.
+
 
 
             </p>
@@ -123,6 +136,8 @@ Vous pouvez ensuite voir les graphiques en cliquant sur 'Les graphiques'.
 				<h2>Exemple de règles :</h2>
 			</header>
             <p>
+      
+      
       
       <h3>Règles : </h3>
 Tous les membres de la CoGM dépensent X pf par jour sur un même GM jusqu'à ce qu'il passe au niveau suivant.
