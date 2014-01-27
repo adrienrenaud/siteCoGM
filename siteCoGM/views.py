@@ -533,9 +533,11 @@ def graphiques(request):
     else:
         return HttpResponseRedirect('/CoGM/voir_cogm/')
         
-    graph_names = ['nMembres', 'nSp_spInstant', 'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea', 'player_df']
+    graph_names = [ 'player_df', 'nMembres', 'nSp_spInstant',  'nGM_nSp', 'GM', 'niv', 'player', 'player_sp', 'player_ea',]
     # graph_names = ['nGM']
     graphs = userdata.textfiles.all().filter(name__in=graph_names)
+    graphs = sorted(graphs, key=lambda x: graph_names.index(x.name))
+    
     argDict = {'request':request, 'graphs': graphs, }
     return render_to_response('graphiques.html', argDict, context_instance=RequestContext(request))
     
