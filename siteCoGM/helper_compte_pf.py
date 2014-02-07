@@ -17,8 +17,8 @@ def print_mail(request, pls,sp,ea,df,f):
    nextBoy = df[[l[1] for l in df].index( max([l[1] for l in df]))][0]
 
    ls=[]
-#   ls.append("@CoGM : %s"%request.user.userdata.name)
-   ls.append("@CoGM")
+  ls.append("@CoGM : %s"%request.user.userdata.name)
+#   ls.append("@CoGM")
 #   ls.append("On a fini le GM (%s) de %s en %i jours, donc je compte %i pf maximum."%(gm[0][1][0], gm[0][0], ndays, ndays*3))
    ls.append("On a fini le GM (%s) de %s."%(gm[0][1][0], gm[0][0]))
    # print "Demain on va chez %s. Tu veux quel GM %s ?"%(nextBoy, nextBoy)
