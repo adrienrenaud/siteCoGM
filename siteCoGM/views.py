@@ -304,7 +304,7 @@ def update_compte_detail(request, info):
         pf = pf[:-len("\n")]
     
     newGM=  "debut %s"%info['date'] + "\n"
-    newGM+= "%s , %s , niv %i"%(info['nomGM'], info['user'], info['nivGM']) + "\n"
+    newGM+= "%s, %s, niv %i"%(info['nomGM'], info['user'], info['nivGM']) + "\n"
     newGM+= pf + "\n"
     newGM+= "---------------------------------\n"
     data.insert(4,newGM)
