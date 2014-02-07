@@ -20,9 +20,13 @@ STATIC_URL = '/static/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb',
-        'USER': 'foo',
-        'PASSWORD': 'bar',
+        # 'NAME': 'mydb',
+        # 'USER': 'foo',
+        # 'PASSWORD': 'bar',
+        'NAME': 'cogm_db',
+        'USER': 'arenaud',
+        'PASSWORD': 'marignan',
         'HOST':'localhost',
+        'PORT':'5432'
     }
 }
