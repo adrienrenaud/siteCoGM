@@ -322,8 +322,8 @@ def update_compte_total_mail(request):
     ### calcul des pf depenses, recus, etc... ####
     pls,sp,ea,df,f = compute_stuff(f)
     ### afficher le resultat selon les arguments : soit compte, soit mail, soit graphiques ###
-    compte = print_compte(pls,sp,ea,df,f)
-    mail = print_mail(pls,sp,ea,df,f)
+    compte = print_compte(request,pls,sp,ea,df,f)
+    mail = print_mail(request,pls,sp,ea,df,f)
     
     nMembres, nGM, nSp, nextBoy = compute_info(pls,sp,ea,df,f)
     request.user.userdata.nMembres = nMembres

@@ -216,35 +216,36 @@ def clean_list(ls):
 
 def main():
 
-    ### recuperation des arguments ###
-    printMail = False
-    doGraph = False
-    for i,arg in enumerate(sys.argv): 
-        if '--mail' == arg:
-            printMail = True
-        if '--graph' == arg:
-            doGraph = True
+    # ### recuperation des arguments ###
+    # printMail = False
+    # doGraph = False
+    # for i,arg in enumerate(sys.argv): 
+    #     if '--mail' == arg:
+    #         printMail = True
+    #     if '--graph' == arg:
+    #         doGraph = True
 
 
-    ### ouverture du fichier texte et recuperation des donnees ###
-    fin = open("./raw_compte_pf_detail.txt","r")
-    ls = fin.readlines()   
-    f = clean_list(ls)
-    fin.close()
+    # ### ouverture du fichier texte et recuperation des donnees ###
+    # fin = open("./raw_compte_pf_detail.txt","r")
+    # ls = fin.readlines()   
+    # f = clean_list(ls)
+    # fin.close()
 
 
-    ### calcul des pf depenses, recus, etc... ####
-    pls,sp,ea,df,f = compute_stuff(f)
+    # ### calcul des pf depenses, recus, etc... ####
+    # pls,sp,ea,df,f = compute_stuff(f)
 
 
-    ### afficher le resultat selon les arguments : soit compte, soit mail, soit graphiques ###
-    if printMail:
-        print_mail(pls,sp,ea,df,f)
-    elif doGraph:
-        from compte_pf_graph import do_graph ### ici on importe la fonction do_graph du fichier compte_pf_graph
-        do_graph(pls,sp,ea,df,f)
-    else:
-        print_compte(pls,sp,ea,df,f)
+    # ### afficher le resultat selon les arguments : soit compte, soit mail, soit graphiques ###
+    # if printMail:
+    #     print_mail(pls,sp,ea,df,f)
+    # elif doGraph:
+    #     from compte_pf_graph import do_graph ### ici on importe la fonction do_graph du fichier compte_pf_graph
+    #     do_graph(pls,sp,ea,df,f)
+    # else:
+    #     print_compte(pls,sp,ea,df,f)
+    pass
 
 
 
