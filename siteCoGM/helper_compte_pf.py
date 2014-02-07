@@ -10,14 +10,14 @@ import math
 ### affichage du mail
 ########################################################################
 ########################################################################
-def print_mail(pls,sp,ea,df,f):
+def print_mail(request, pls,sp,ea,df,f):
 
    gm = f[0]
    ndays = int(max([math.ceil(l[1]/3.) for l in gm[1:]]))
    nextBoy = df[[l[1] for l in df].index( max([l[1] for l in df]))][0]
 
    ls=[]
-   ls.append("@CoGM")
+   ls.append("@CoGM : %s"%request.user.userdata.name)
 #   ls.append("On a fini le GM (%s) de %s en %i jours, donc je compte %i pf maximum."%(gm[0][1][0], gm[0][0], ndays, ndays*3))
    ls.append("On a fini le GM (%s) de %s."%(gm[0][1][0], gm[0][0]))
    # print "Demain on va chez %s. Tu veux quel GM %s ?"%(nextBoy, nextBoy)
@@ -53,7 +53,7 @@ def print_mail(pls,sp,ea,df,f):
 ### affichage du compte
 ########################################################################
 ########################################################################
-def print_compte(pls,sp,ea,df,f):
+def print_compte(request, pls,sp,ea,df,f):
    ls = []
    ls.append('-'*40)
    ls.append('-'*40)
