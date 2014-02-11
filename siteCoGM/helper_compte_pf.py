@@ -182,6 +182,28 @@ def clean_list(ls):
             igm+=1
             continue
         ldd[igm].append(l.replace("\n",""))
+        
+    # f=[]
+    # for ll in ldd:
+    #     j=[]
+    #     for i in range(len(ll)):
+    #         if i==0:
+    #             continue
+    #         elif i==1:
+    #             dd = ll[0].split(" ")[1].replace("\r","")
+    #             y = 2000 + int(dd.split("/")[2])
+    #             m = int(dd.split("/")[1])
+    #             d = int(dd.split("/")[0])
+    #             thedate = date(y,m,d)
+    #             gmName = ll[1].split(",")[0]
+    #             niv = int(ll[1].split(",")[2].split(" ")[2].replace("\r",""))
+    #             st = (ll[i].split(",")[1].replace(" ",""), (gmName, niv, thedate))
+    #         else:
+    #             st = (ll[i].split(" ")[0], int(ll[i].split(" ")[2].replace("pf","")) )
+    #         j.append(st)
+    #     f.append(j)
+        
+        
 
     f=[]
     for ll in ldd:
@@ -195,11 +217,15 @@ def clean_list(ls):
                 m = int(dd.split("/")[1])
                 d = int(dd.split("/")[0])
                 thedate = date(y,m,d)
-                gmName = ll[1].split(",")[0]
-                niv = int(ll[1].split(",")[2].split(" ")[2].replace("\r",""))
-                st = (ll[i].split(",")[1].replace(" ",""), (gmName, niv, thedate))
+                gmName = ll[i].split(",")[0].strip()
+                niv = int(ll[i].split(",")[2].split(" ")[2].replace("\r",""))
+                gmplayerName = ll[i].split(",")[1].strip()
+                st = (gmplayerName, (gmName, niv, thedate))
             else:
-                st = (ll[i].split(" ")[0], int(ll[i].split(" ")[2].replace("pf","")) )
+                # st = (ll[i].split(" ")[0], int(ll[i].split(" ")[2].replace("pf","")) )
+                playerName = ll[i].split(":")[0].strip()
+                pf = int(ll[i].split(":")[1].replace("pf","").strip())
+                st = (playerName, pf)
             j.append(st)
         f.append(j)
 

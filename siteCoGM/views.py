@@ -237,10 +237,16 @@ def fiche_user(request):
 class ajoutGMForm(forms.Form):
     # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
     cols = 58
-    user = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='propriétaire GM')   
-    nomGM = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='nom GM')     
-    nivGM = forms.IntegerField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='niveau GM')     
-    date = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='date')     
+    # user = forms.CharField(widget=forms.TextInput(attrs={'style': 'width:400px',}), label='propriétaire GM')
+    user = forms.CharField(widget=forms.TextInput, label='propriétaire GM')
+    nomGM = forms.CharField(widget=forms.TextInput, label='nom GM')
+    nivGM = forms.IntegerField(widget=forms.TextInput, label='niveau GM')
+    date = forms.CharField(widget=forms.TextInput, label='date')
+    # user = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1, 'style': 'height:1.5em'}), label='propriétaire GM')   
+    # user = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1, 'style': 'height:1.5em'}), label='propriétaire GM')   
+    # nomGM = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='nom GM')     
+    # nivGM = forms.IntegerField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='niveau GM')     
+    # date = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 1}), label='date')     
     pf = forms.CharField(widget=forms.Textarea(attrs={'cols': cols, 'rows': 40}), label='pf dépensés')
     # def clean_password(self):
     #     password = self.cleaned_data['password']
@@ -258,11 +264,11 @@ def ajout_GM(request):
         if form.is_valid():
             cd = form.cleaned_data
             update_compte_detail(request, cd)
-            try:
-                update_compte_total_mail(request)
-            except:
-                return HttpResponseRedirect('/CoGM/view/erreur_compte/')
-            send_backup_mail(request)
+            # try:
+            update_compte_total_mail(request)
+            # except:
+            #     return HttpResponseRedirect('/CoGM/view/erreur_compte/')
+            # send_backup_mail(request)
             return HttpResponseRedirect('/CoGM/')
     else:
         file = request.user.userdata.textfiles.all().get(filetype=3).file
@@ -307,7 +313,8 @@ def update_compte_detail(request, info):
     newGM+= "%s, %s, niv %i"%(info['nomGM'], info['user'], info['nivGM']) + "\n"
     newGM+= pf + "\n"
     newGM+= "---------------------------------\n"
-    data.insert(4,newGM)
+    data.insert(4, newGM)
+    # data.insert(4,u''.join(newGM))# if we want utf8...
     
     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'w') as file:
        for l in data:
