@@ -304,7 +304,7 @@ def ajout_GM(request):
     
 def update_compte_detail(request, info):
     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'r') as file:
-       data = file.readlines()
+       data = [ l.decode('utf-8') for l in file.readlines()]
     pf = info['pf']
     while pf.endswith("\n") or pf.endswith("\r"):
         pf = pf[:-len("\n")]
@@ -314,11 +314,10 @@ def update_compte_detail(request, info):
     newGM+= pf + "\n"
     newGM+= "---------------------------------\n"
     data.insert(4, newGM)
-    # data.insert(4,u''.join(newGM))# if we want utf8...
     
     with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'w') as file:
        for l in data:
-            file.write(l)
+            file.write(l.encode('utf-8'))
        
        
 def update_compte_total_mail(request):
@@ -406,7 +405,7 @@ def modify_compte_detail(request):
         if form.is_valid():
             cd = form.cleaned_data
             with default_storage.open(request.user.userdata.textfiles.all().get(filetype=0).file.name, 'w') as file:
-                file.write(cd['detail'])
+                file.write(cd['detail'].encode('utf-8'))
             try:
                 update_compte_total_mail(request)
             except:
@@ -447,7 +446,7 @@ def modify_ajout_gm(request):
         if form.is_valid():
             cd = form.cleaned_data
             with default_storage.open(request.user.userdata.textfiles.all().get(filetype=3).file.name, 'w') as file:
-                file.write(cd['detail'])
+                file.write(cd['detail'].encode('utf-8'))
             return HttpResponseRedirect('/CoGM/')
     else:
         with default_storage.open(request.user.userdata.textfiles.all().get(filetype=3).file.name, 'r') as file:
